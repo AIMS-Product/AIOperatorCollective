@@ -108,11 +108,25 @@ function firstParam(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] : value
 }
 
-function calendarDownloadHref(eventUri: string | undefined) {
-  if (!eventUri) return null
+function calendarDownloadHref(params: Record<string, string | string[] | undefined>) {
+  const eventUri = firstParam(params.calendlyEventUri)
+  const inviteeUri = firstParam(params.calendlyInviteeUri)
+  const eventName = firstParam(params.event_type_name)
+  const eventStartTime = firstParam(params.event_start_time)
+  const eventEndTime = firstParam(params.event_end_time)
 
-  const params = new URLSearchParams({ eventUri })
-  return `/api/calendly/calendar?${params.toString()}`
+  const calendarParams = new URLSearchParams()
+  if (eventUri) calendarParams.set("eventUri", eventUri)
+  if (inviteeUri) calendarParams.set("inviteeUri", inviteeUri)
+  if (eventName) calendarParams.set("eventName", eventName)
+  if (eventStartTime) calendarParams.set("eventStartTime", eventStartTime)
+  if (eventEndTime) calendarParams.set("eventEndTime", eventEndTime)
+
+  if (!calendarParams.has("eventUri") && !calendarParams.has("inviteeUri")) {
+    if (!eventStartTime || !eventEndTime) return null
+  }
+
+  return `/api/calendly/calendar?${calendarParams.toString()}`
 }
 
 export default async function PostBookingNextStepsPage({
@@ -121,7 +135,7 @@ export default async function PostBookingNextStepsPage({
   searchParams: SearchParams
 }) {
   const params = await searchParams
-  const calendarHref = calendarDownloadHref(firstParam(params.calendlyEventUri))
+  const calendarHref = calendarDownloadHref(params)
 
   return (
     <main className="min-h-screen bg-[#FAFAF7] text-[#1A1A1A]">

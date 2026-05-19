@@ -30,18 +30,44 @@ const AOC_EVENT_TYPE_URIS = (process.env.CALENDLY_AOC_EVENT_TYPE_URIS ?? "")
   .map((value) => value.trim())
   .filter(Boolean)
 
-function calendlyEventUrl(rawUri: string | null) {
+function calendlyEventUrl(rawUri: string | null, rawInviteeUri?: string | null) {
+  const parsedFromEvent = calendlyScheduledEventUrl(rawUri)
+  if (parsedFromEvent) return parsedFromEvent
+
+  return calendlyScheduledEventUrlFromInvitee(rawInviteeUri)
+}
+
+function calendlyScheduledEventUrl(rawUri: string | null | undefined) {
   if (!rawUri) return null
 
   try {
     const url = new URL(rawUri)
-    if (url.origin !== CALENDLY_API_BASE) return null
-    if (!/^\/scheduled_events\/[A-Za-z0-9-]+$/.test(url.pathname)) {
+    if (!["api.calendly.com", "calendly.com"].includes(url.hostname)) {
       return null
     }
-    url.search = ""
-    url.hash = ""
-    return url
+    const match = url.pathname.match(
+      /^(?:\/api\/v2)?\/scheduled_events\/([A-Za-z0-9-]+)$/
+    )
+    if (!match) return null
+    return new URL(`/scheduled_events/${match[1]}`, CALENDLY_API_BASE)
+  } catch {
+    return null
+  }
+}
+
+function calendlyScheduledEventUrlFromInvitee(rawUri: string | null | undefined) {
+  if (!rawUri) return null
+
+  try {
+    const url = new URL(rawUri)
+    if (!["api.calendly.com", "calendly.com"].includes(url.hostname)) {
+      return null
+    }
+    const match = url.pathname.match(
+      /^(?:\/api\/v2)?\/scheduled_events\/([A-Za-z0-9-]+)\/invitees\/[A-Za-z0-9-]+$/
+    )
+    if (!match) return null
+    return new URL(`/scheduled_events/${match[1]}`, CALENDLY_API_BASE)
   } catch {
     return null
   }
@@ -121,23 +147,41 @@ function eventUuid(uri: string) {
   return uri.split("/").filter(Boolean).at(-1) ?? crypto.randomUUID()
 }
 
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url)
-  const eventUrl = calendlyEventUrl(searchParams.get("eventUri"))
+function fallbackCalendarFields(searchParams: URLSearchParams) {
+  const start = searchParams.get("eventStartTime")
+  const end = searchParams.get("eventEndTime")
+  const formattedStart = start ? formatIcsDate(start) : null
+  const formattedEnd = end ? formatIcsDate(end) : null
 
-  if (!eventUrl) {
-    return NextResponse.json({ error: "Missing Calendly event URI" }, { status: 400 })
+  if (!formattedStart || !formattedEnd) return null
+
+  return {
+    uid: `calendly-redirect-${Buffer.from(`${start}-${end}`)
+      .toString("base64url")
+      .slice(0, 40)}@aioperatorcollective.com`,
+    summary: searchParams.get("eventName") ?? "AI Operator Collective consult call",
+    start: formattedStart,
+    end: formattedEnd,
   }
+}
 
+async function calendlyEventResource(eventUrl: URL) {
   if (!CALENDLY_TOKEN) {
-    return NextResponse.json({ error: "Calendly API token is not configured" }, { status: 500 })
+    return {
+      error: NextResponse.json(
+        { error: "Calendly API token is not configured" },
+        { status: 500 }
+      ),
+    }
   }
 
   if (AOC_EVENT_TYPE_URIS.length === 0) {
-    return NextResponse.json(
-      { error: "Calendly event type allowlist is not configured" },
-      { status: 500 }
-    )
+    return {
+      error: NextResponse.json(
+        { error: "Calendly event type allowlist is not configured" },
+        { status: 500 }
+      ),
+    }
   }
 
   const response = await fetch(eventUrl.toString(), {
@@ -149,21 +193,70 @@ export async function GET(req: Request) {
   })
 
   if (!response.ok) {
-    return NextResponse.json(
-      { error: "Calendly event could not be loaded" },
-      { status: response.status === 404 ? 404 : 502 }
-    )
+    return {
+      error: NextResponse.json(
+        { error: "Calendly event could not be loaded" },
+        { status: response.status === 404 ? 404 : 502 }
+      ),
+    }
   }
 
   const calendlyEvent = (await response.json()) as CalendlyScheduledEventResponse
   const resource = calendlyEvent.resource
-  const start = resource?.start_time ? formatIcsDate(resource.start_time) : null
-  const end = resource?.end_time ? formatIcsDate(resource.end_time) : null
   const eventTypeUri = resource?.event_type ?? null
 
   if (!eventTypeUri || !AOC_EVENT_TYPE_URIS.includes(eventTypeUri)) {
-    return NextResponse.json({ error: "Calendly event is not an AIOC consult" }, { status: 403 })
+    return {
+      error: NextResponse.json(
+        { error: "Calendly event is not an AIOC consult" },
+        { status: 403 }
+      ),
+    }
   }
+
+  return { resource }
+}
+
+function calendarResponse(ics: string) {
+  return new Response(ics, {
+    headers: {
+      "Content-Type": "text/calendar; charset=utf-8",
+      "Content-Disposition": 'attachment; filename="ai-operator-collective-call.ics"',
+      "Cache-Control": "no-store",
+    },
+  })
+}
+
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url)
+  const eventUrl = calendlyEventUrl(
+    searchParams.get("eventUri"),
+    searchParams.get("inviteeUri")
+  )
+
+  if (!eventUrl) {
+    const fallback = fallbackCalendarFields(searchParams)
+    if (!fallback) {
+      return NextResponse.json({ error: "Missing calendar details" }, { status: 400 })
+    }
+
+    const ics = buildIcs({
+      uid: fallback.uid,
+      summary: fallback.summary,
+      description:
+        "Your AI Operator Collective consult call. Your Calendly confirmation email has the latest meeting details, reschedule link, and cancellation link.",
+      start: fallback.start,
+      end: fallback.end,
+    })
+
+    return calendarResponse(ics)
+  }
+
+  const { resource, error } = await calendlyEventResource(eventUrl)
+  if (error) return error
+
+  const start = resource?.start_time ? formatIcsDate(resource.start_time) : null
+  const end = resource?.end_time ? formatIcsDate(resource.end_time) : null
 
   if (!resource?.uri || !start || !end) {
     return NextResponse.json(
@@ -184,11 +277,5 @@ export async function GET(req: Request) {
     url: location?.startsWith("http") ? location : undefined,
   })
 
-  return new Response(ics, {
-    headers: {
-      "Content-Type": "text/calendar; charset=utf-8",
-      "Content-Disposition": 'attachment; filename="ai-operator-collective-call.ics"',
-      "Cache-Control": "no-store",
-    },
-  })
+  return calendarResponse(ics)
 }

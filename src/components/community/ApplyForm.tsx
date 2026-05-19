@@ -479,17 +479,39 @@ export function ApplyForm() {
       return true
     }
 
+    const calendlyUri = (value: unknown) => {
+      if (typeof value === "string") return value
+      if (
+        value &&
+        typeof value === "object" &&
+        "uri" in value &&
+        typeof value.uri === "string"
+      ) {
+        return value.uri
+      }
+      return null
+    }
+
+    const isCalendlyOrigin = (origin: string) => {
+      try {
+        const { hostname } = new URL(origin)
+        return hostname === "calendly.com" || hostname.endsWith(".calendly.com")
+      } catch {
+        return false
+      }
+    }
+
     // Booking-complete listener — redirect to next-steps page.
     const onMessage = (e: MessageEvent) => {
       const data = e.data as {
         event?: string
         payload?: {
-          event?: { uri?: string }
-          invitee?: { uri?: string }
+          event?: { uri?: string } | string
+          invitee?: { uri?: string } | string
         }
       }
       if (
-        e.origin === "https://calendly.com" &&
+        isCalendlyOrigin(e.origin) &&
         typeof data === "object" &&
         data?.event === "calendly.event_scheduled"
       ) {
@@ -498,11 +520,13 @@ export function ApplyForm() {
           email: email.trim().toLowerCase(),
           name: `${firstName.trim()} ${lastName.trim()}`.trim(),
         })
-        if (data.payload?.event?.uri) {
-          query.set("calendlyEventUri", data.payload.event.uri)
+        const eventUri = calendlyUri(data.payload?.event)
+        const inviteeUri = calendlyUri(data.payload?.invitee)
+        if (eventUri) {
+          query.set("calendlyEventUri", eventUri)
         }
-        if (data.payload?.invitee?.uri) {
-          query.set("calendlyInviteeUri", data.payload.invitee.uri)
+        if (inviteeUri) {
+          query.set("calendlyInviteeUri", inviteeUri)
         }
         setTimeout(() => {
           window.location.href = `/apply/next-steps?${query.toString()}`
