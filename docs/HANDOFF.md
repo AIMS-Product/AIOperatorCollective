@@ -130,7 +130,7 @@ vercel --prod --yes
 ⚠️ Silently cancelled = the inline T+0 result email fires, but the multi-day drip queues are silently dropped by `process-email-queue` cron until handlers are wired (see Section 9).
 
 ### AI Operator Collective application flow
-- `/apply` — 10-question Typeform-spec application
+- `/apply` — 8-question Typeform-spec application
 - Application submit creates a `Deal`, sends `aoc.application-received` email (BCC'd to Ryan)
 - 30min–72h: abandoned-application reminder (one-shot)
 - 2 / 5 / 9 days post-apply: booking reminders if not yet booked

@@ -65,7 +65,7 @@ export default async function AdminDealDetailPage({ params }: { params: Promise<
   // The apply route spreads answers flat into the data blob:
   //   data: { ...answers, firstName, lastName, phone, zipCode, country,
   //           otherTextById, followUpTextById }
-  // So every question id (current_role, why_now, hours_per_week, etc.)
+  // So every question id (current_role, hours_per_week, etc.)
   // lives at the TOP LEVEL of appData. Values are mixed-shape:
   //   - text questions:    string
   //   - multi-select:      string[]

@@ -6,12 +6,12 @@
  * the API validator at /api/community/apply.
  *
  * Refreshed per Jess's typeform-application-spec.md (2026-05-06):
- *  - 10 application questions (was 5).
+ *  - 8 application questions after removing redundant Typeform steps.
  *  - Three-tier routing: Green (book a call), Yellow (we'll review +
  *    follow up), Red/Nurture (waitlist).
  *  - Hard gates that drop applicants into Yellow/Red regardless of
- *    numeric score: hours <5/wk, refusal of outreach, refusal of sales
- *    conversations, or "not ready to invest" → Yellow or Red.
+ *    numeric score: hours <5/wk, refusal of outreach, or
+ *    "not ready to invest" → Yellow or Red.
  *  - Internal tier names (hot/warm/cold) preserved for downstream
  *    compatibility — they are mapped from the public routing tier:
  *    green↔hot, yellow↔warm, red↔cold.
@@ -38,10 +38,10 @@ export interface Question {
 }
 
 /**
- * 10-question application aligned to the Jess spec.
+ * 8-question application aligned to the Jess spec.
  *
  * Scoring is intentionally light — the routing tier is determined more
- * by hard gates (hours, outreach willingness, sales comfort, investment
+ * by hard gates (hours, outreach willingness, investment
  * readiness) than by a raw point total.
  */
 export const QUESTIONS: Question[] = [
@@ -58,21 +58,6 @@ export const QUESTIONS: Question[] = [
       { label: "Other", value: "other", points: 1 },
     ],
     allowOther: true,
-  },
-  {
-    id: "why_now",
-    question: "What made you look at the AI Operator Collective now?",
-    description:
-      "20-30 characters, in your own words. We use this to score intent and prep for the call.",
-    text: {
-      question: "Why now?",
-      minLength: 20,
-    },
-    // The text answer is the real signal here; options are required by the
-    // form widget but a single placeholder option keeps scoring stable.
-    options: [
-      { label: "Submit", value: "submitted", points: 2 },
-    ],
   },
   {
     id: "hours_per_week",
@@ -177,7 +162,6 @@ export const QUESTIONS: Question[] = [
       whenValue: "*", // always show the follow-up after this question
       question:
         "Add any context that would help us understand what happened.",
-      minLength: 10,
     },
     options: [
       { label: "Nothing yet", value: "nothing_yet", points: 0 },
@@ -188,31 +172,6 @@ export const QUESTIONS: Question[] = [
       { label: "Upwork / Fiverr", value: "marketplaces", points: 1 },
       { label: "Paid ads", value: "paid_ads", points: 1 },
       { label: "I already have clients", value: "have_clients", points: 3 },
-    ],
-  },
-  {
-    id: "discovery_comfort",
-    question:
-      "How comfortable are you having business discovery conversations?",
-    description:
-      "The job is asking better questions, not pitching harder. We'll teach the framework, but the willingness has to be there.",
-    options: [
-      { label: "Comfortable", value: "comfortable", points: 3 },
-      {
-        label: "I can do it with a framework",
-        value: "with_framework",
-        points: 3,
-      },
-      {
-        label: "Nervous, but willing to practice",
-        value: "nervous_willing",
-        points: 2,
-      },
-      {
-        label: "I do not want to do sales conversations",
-        value: "no_sales",
-        points: 0,
-      },
     ],
   },
   {
@@ -265,7 +224,7 @@ const MULTI_SELECT_CAP = 2
  * with the schema instead of drifting whenever a question is added/
  * removed/re-pointed. Replaces the previous hardcoded 18 — that figure
  * was correct under the original 5-question single-select model but
- * went stale once Jess shipped the 10-question schema with multi-select
+ * went stale once Jess shipped the multi-select application schema
  * questions, causing scores like "117/100" to appear in the CRM.
  *
  * Per-question max:
@@ -326,19 +285,14 @@ export function calculateScore(answers: Record<string, string | string[]>) {
    *
    * Any of these → Red / nurture. We do not let a high numeric score
    * override these — the spec is explicit that operators who refuse
-   * outreach or sales are not the right fit, regardless of polish.
+   * outreach are not the right fit, regardless of polish.
    */
   const hours = answers.hours_per_week
   const outreach = answers.outreach_willingness
-  const discovery = answers.discovery_comfort
   const investment = answers.investment_readiness
 
   let routingTier: RoutingTier
-  if (
-    hours === "0_4" ||
-    outreach === "no_outreach" ||
-    discovery === "no_sales"
-  ) {
+  if (hours === "0_4" || outreach === "no_outreach") {
     routingTier = "red"
   } else if (investment === "not_now") {
     // Spec says "Not right now" routes to nurture — call it red so the
@@ -430,27 +384,23 @@ export function getStepIntro(
   switch (questionIndex) {
     case 0:
       return `Hey ${firstName}, let's start with where you are right now.`
-    case 1:
-      return `Tell me what's pulling you toward the Collective.`
-    case 2: {
+    case 1: {
       const role = answers.current_role
       if (role === "between_roles")
         return `Got it. Let's talk about how much time you can really commit.`
       return "Quick reality-check on your time."
     }
-    case 3:
+    case 2:
       return `Where do you want to land first?`
-    case 4:
+    case 3:
       return `This one's important, ${firstName}. Be honest with yourself.`
-    case 5:
+    case 4:
       return `Helps us tailor the call to where you already have context.`
-    case 6:
+    case 5:
       return `What you've already tried tells us a lot about your starting point.`
-    case 7:
-      return `Sales conversations — how do you feel about them?`
-    case 8:
+    case 6:
       return `Now the operator-traits question. Pick the ones that genuinely sound like you.`
-    case 9:
+    case 7:
       return `Last one, ${firstName}. The honest one.`
     default:
       return ""

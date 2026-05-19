@@ -140,7 +140,7 @@ interface Props {
   country?: string | null
   /** Map of question id → answer value. Single-select / text questions are
    *  strings; multi-select questions are string[]. Keyed by current QUESTIONS
-   *  schema (current_role, why_now, hours_per_week, …). */
+   *  schema (current_role, hours_per_week, …). */
   applicationAnswers?: Record<string, string | string[] | undefined> | null
   applicationSubmittedAt?: string | null
   /** "Other" inline text, keyed by question id. */

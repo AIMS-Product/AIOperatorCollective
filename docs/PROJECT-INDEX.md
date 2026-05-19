@@ -53,7 +53,7 @@ Each folder in parentheses is a "route group" — it groups related pages withou
 | Folder | URL prefix | Who sees it | Examples |
 |---|---|---|---|
 | `(marketing)/` | `/` (public) | Anyone on the internet | `/`, `/about`, `/pricing`, `/blog`, `/case-studies`, `/why-aims` |
-| `(landing)/apply/` | `/apply` | Anyone who clicks "Apply" | The 10-question application form |
+| `(landing)/apply/` | `/apply` | Anyone who clicks "Apply" | The 8-question application form |
 | `(landing)/tools/` | `/tools/*` | Anyone (lead magnets) | `/tools/ai-readiness-quiz`, `/tools/roi-calculator`, `/tools/website-audit` |
 | `(auth)/` | `/sign-in`, `/sign-up` | Anyone | Clerk auth pages |
 | `(portal)/portal/` | `/portal/*` | Members (CLIENT role) | `/portal/dashboard`, `/portal/onboard`, `/portal/quests`, `/portal/playbooks` |
@@ -172,7 +172,7 @@ Easiest reference to copy: the AI Readiness Quiz (across all 4 files).
 | `close/` | Close CRM integration |
 | `db/` | Database query helpers |
 | `auth.ts` | Role + session helpers |
-| `collective-application.ts` | The 10-question apply form definition |
+| `collective-application.ts` | The 8-question apply form definition |
 | `blog.ts` | Reads MDX files from `content/blog/` |
 
 ---

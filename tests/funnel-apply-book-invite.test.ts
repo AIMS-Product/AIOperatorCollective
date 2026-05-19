@@ -22,19 +22,24 @@ function file(relPath: string): string {
   return readFileSync(join(SRC, relPath), "utf-8")
 }
 
-// ─── 1. Scoring (refreshed for 10-question Jess spec) ──────────────────────
+// ─── 1. Scoring (refreshed for Jess application spec) ───────────────────────
 //
 // Question library evolved from 5 timeline/revenue/investment-style questions
-// to a 10-question apprenticeship-fit application with hard gates on hours,
-// outreach willingness, sales comfort, and investment readiness. Tests below
+// to an apprenticeship-fit application with hard gates on hours,
+// outreach willingness, and investment readiness. Tests below
 // hit the contract that matters: max-strength answers route to green, hard
 // gates always force red, mid-strength answers can be yellow or green.
 
 // Build "best-case" answers — pick the highest-points option for each Q,
-// and an empty array for multi-select questions (multi caps at +2 anyway).
+// and enough multi-select options to hit the capped multi-select score.
 const greenAnswers: Record<string, string | string[]> = Object.fromEntries(
   QUESTIONS.map((q) => {
-    if (q.selection === "multi") return [q.id, []]
+    if (q.selection === "multi") {
+      const selected = [...q.options]
+        .sort((a, b) => b.points - a.points)
+        .map((o) => o.value)
+      return [q.id, selected]
+    }
     const max = Math.max(...q.options.map((o) => o.points))
     return [q.id, q.options.find((o) => o.points === max)!.value]
   }),
@@ -75,11 +80,6 @@ describe("calculateScore — Jess 3-tier routing", () => {
       ...greenAnswers,
       outreach_willingness: "no_outreach",
     })
-    expect(r.routingTier).toBe("red")
-  })
-
-  it("hard gate: sales-conversation refusal always routes red", () => {
-    const r = calculateScore({ ...greenAnswers, discovery_comfort: "no_sales" })
     expect(r.routingTier).toBe("red")
   })
 
@@ -200,8 +200,8 @@ describe("POST /api/webhooks/mighty — wiring", () => {
     expect(content).toMatch(/timingSafeEqual/)
   })
 
-  it("returns 401 on invalid signature", () => {
-    expect(content).toMatch(/Invalid signature[\s\S]*?status:\s*401|status:\s*401[\s\S]*?Invalid signature/)
+  it("returns 401 on invalid auth", () => {
+    expect(content).toMatch(/Invalid auth[\s\S]*?status:\s*401|status:\s*401[\s\S]*?Invalid auth/)
   })
 
   it("returns 500 on handler failure so Mighty retries", () => {
