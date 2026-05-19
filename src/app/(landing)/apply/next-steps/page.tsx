@@ -200,9 +200,10 @@ export default async function PostBookingNextStepsPage({
                   </div>
                 ) : (
                   <p className="text-xs leading-relaxed text-[#737373]">
-                    Calendly also sent the invite to your inbox. If this page
-                    was opened without booking details, use the calendar link in
-                    that email.
+                    You&apos;re covered: Calendly sent the invite and
+                    confirmation details to your inbox. Add it to the calendar
+                    you check most, and keep that email handy if you need to
+                    reschedule.
                   </p>
                 )}
               </div>
