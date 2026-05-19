@@ -1,308 +1,229 @@
 import type { Metadata } from "next"
-import { ToolLogo } from "./ToolLogo"
 import {
-  CheckCircle2,
+  ArrowRight,
   Calendar,
-  FileText,
-  Sparkles,
-  Zap,
+  CheckCircle2,
+  Clock3,
+  Flame,
+  Search,
   Target,
-  TrendingUp,
-  Users,
-  MessageCircle,
   Wrench,
-  BookOpen,
-  Download,
-  Video,
-  BarChart3,
+  Workflow,
 } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Your call is confirmed — AI Operator Collective",
+  title: "Your call is confirmed - AI Operator Collective",
   description:
-    "Prep for your AI Operator strategy call. AI use cases by industry, the operator tool stack, and real case studies from the community.",
+    "Your AI Operator Collective call is booked. Confirm the calendar invite and preview practical business problems AI Operators learn to spot.",
   robots: { index: false, follow: false },
 }
 
-/* -------------------------------------------------------------------------- */
-/*  AI use cases — pulled from the trackr master resource library             */
-/* -------------------------------------------------------------------------- */
-
-interface UseCase {
-  niche: string
-  title: string
-  before: string
-  after: string
-  tools: string[]
+interface CaseStudy {
+  company: string
+  industry: string
+  headline: string
+  fire: string
+  fix: string
+  result: string
+  lesson: string
+  icon: typeof Search
 }
 
-const USE_CASES: UseCase[] = [
+const CASE_STUDIES: CaseStudy[] = [
   {
-    niche: "Marketing consultant",
-    title: "AI SEO Content Engine",
-    before: "Writing one blog post per week, eight hours each, competing with agencies that publish daily.",
-    after: "AI research → outline → draft → human-edit pipeline. Higher content volume without scaling headcount.",
-    tools: ["Perplexity", "Claude", "Notion"],
+    company: "McKenzie",
+    industry: "Promotional printing",
+    headline: "Finding acquisition targets without hiring a research team.",
+    fire:
+      "McKenzie had a strong product and wanted to expand by finding specific businesses they could acquire. The ask sounded big: identify the right companies, understand each one, and reach the owners.",
+    fix:
+      "The useful move was not a complicated AI product. It was a clear target profile, AI-assisted company research, owner contact discovery, and hyper-personalized outreach at scale.",
+    result:
+      "McKenzie is actively speaking with businesses that may be open to selling.",
+    lesson:
+      "Good AI work starts with narrowing the question. Once the business knew exactly what it was looking for, AI became leverage instead of noise.",
+    icon: Search,
   },
   {
-    niche: "Sales rep / BDR",
-    title: "Hyper-personalized cold outbound",
-    before: "Reading LinkedIn profiles manually to write warm cold emails, one at a time.",
-    after: "Enrichment → Claygent research → Instantly sequence. Personalization at scale without sounding templated.",
-    tools: ["Apollo", "Clay", "Instantly"],
+    company: "Alpha",
+    industry: "Landscaping",
+    headline: "Solving the scheduling problem before building an AI agent.",
+    fire:
+      "Alpha came in thinking they needed an AI agent to handle initial consultation scheduling. The real problem was simpler: four to five days of back-and-forth just to get a prospect onto the calendar.",
+    fix:
+      "Instead of overbuilding, the better first move was a lead form connected to a booking flow that already understood their availability.",
+    result:
+      "A faster path from interested lead to scheduled consultation, without selling them a more complex system than they needed.",
+    lesson:
+      "Sometimes the operator move is restraint. The win is solving the real bottleneck quickly, not proving you can build the flashiest AI thing.",
+    icon: Calendar,
   },
   {
-    niche: "Customer success / support",
-    title: "AI tier-1 support agent",
-    before: "Support team drowning in repetitive tickets. Founder pulled into support every day.",
-    after: "Notion KB feeding an AI agent that handles common tier-1 questions while humans focus on the hard ones.",
-    tools: ["Notion", "Intercom Fin"],
-  },
-  {
-    niche: "Engineering manager",
-    title: "AI engineering velocity stack",
-    before: "PR review backlogs. Long cycles to ship small changes.",
-    after: "Claude Code + Cursor + Linear. Shorter review cycles, fewer bottlenecks.",
-    tools: ["Claude Code", "Cursor", "Linear"],
-  },
-  {
-    niche: "Operations / RevOps",
-    title: "AI tool research pipeline",
-    before: "Evaluating new SaaS takes days. Vendor calls and scattered notes.",
-    after: "Perplexity deep-dive → scorecard in Notion. Minutes instead of days with one source of truth.",
-    tools: ["Perplexity", "Notion", "Claude"],
-  },
-  {
-    niche: "Content / media",
-    title: "AI video marketing machine",
-    before: "One polished YouTube video per month. No shorts. No repurposing.",
-    after: "A single recording fans out into short-form, posts, and newsletter with AI handling the repurposing.",
-    tools: ["Runway", "Canva", "Descript"],
-  },
-  {
-    niche: "Founder / CEO",
-    title: "AI-native operating system",
-    before: "Hiring for every function. Payroll eating margin.",
-    after: "Agent-heavy ops. Humans lead strategy + client relationships; agents run content, research, admin.",
-    tools: ["n8n", "Claude Code", "Linear"],
-  },
-  {
-    niche: "Analytics / data",
-    title: "Self-serve AI analytics stack",
-    before: "Ad-hoc SQL requests from every team. Analyst pulled in every day.",
-    after: "Team self-serves through natural-language queries into the warehouse.",
-    tools: ["PostHog", "Metabase", "Claude"],
-  },
-  {
-    niche: "People ops / HR",
-    title: "AI-automated onboarding",
-    before: "Week-long new-hire onboarding, manual SaaS provisioning across 10 tools.",
-    after: "Templates fully provision on day 1. Less HR overhead, new hires productive faster.",
-    tools: ["Rippling", "Notion", "Ramp"],
-  },
-  {
-    niche: "RevOps / inbound leader",
-    title: "Multi-thread inbound leads playbook",
-    before: "Inbound trial signups get the same generic nurture. Reps pick the best ones manually.",
-    after: "Enrichment + scoring + tiered routing with alerts so the best-fit leads never get lost in the noise.",
-    tools: ["Clay", "Apollo", "Slack"],
+    company: "Modern Amenities",
+    industry: "Vending services",
+    headline: "Getting three systems to talk to each other.",
+    fire:
+      "Modern Amenities operates nationally and had sales data living across three disconnected systems. Their team was spending hours every week doing manual data entry just to keep the portfolio view current.",
+    fix:
+      "The practical solution was connecting the systems so an update in one place could update the others automatically.",
+    result:
+      "The workflow saves an estimated 10-15 hours per week - time the sales team can now put back into prospecting new locations.",
+    lesson:
+      "This is the kind of ROI businesses understand: fewer manual handoffs, cleaner data, and more time spent on work that grows the business.",
+    icon: Workflow,
   },
 ]
 
-// Domain is what we pass to logo.clearbit.com for the favicon, URL is where
-// the card links to. Domain doubled as href when the tool's root domain +
-// their product page are the same.
-const OPERATOR_TOOLS: {
-  name: string
-  category: string
-  domain: string
-  url: string
-}[] = [
-  { name: "Claude",     category: "Reasoning",       domain: "anthropic.com",  url: "https://claude.ai" },
-  { name: "Perplexity", category: "Research",        domain: "perplexity.ai",  url: "https://www.perplexity.ai" },
-  { name: "Raycast",    category: "Launcher",        domain: "raycast.com",    url: "https://raycast.com" },
-  { name: "Cursor",     category: "AI Code Editor",  domain: "cursor.com",     url: "https://cursor.com" },
-  { name: "Wispr Flow", category: "Speech-to-Text",  domain: "wisprflow.ai",   url: "https://wisprflow.ai" },
-  { name: "Instantly",  category: "Cold Email",      domain: "instantly.ai",   url: "https://instantly.ai" },
-  { name: "Firecrawl",  category: "Web-to-LLM",      domain: "firecrawl.dev",  url: "https://www.firecrawl.dev" },
-  { name: "Dex",        category: "Browser Agent",   domain: "getdex.com",     url: "https://getdex.com" },
-  { name: "Notion",     category: "Knowledge",       domain: "notion.so",      url: "https://www.notion.so" },
-  { name: "v0",         category: "App Builder",     domain: "v0.app",         url: "https://v0.app" },
-  { name: "Fathom",     category: "Meeting AI",      domain: "fathom.video",   url: "https://fathom.video" },
-  { name: "ElevenLabs", category: "Voice Gen",       domain: "elevenlabs.io",  url: "https://elevenlabs.io" },
+const COMMON_THREADS = [
+  {
+    title: "The business did not need an AI gimmick.",
+    body:
+      "Each example started with a business problem: acquisition research, scheduling friction, or disconnected systems.",
+    icon: Flame,
+  },
+  {
+    title: "The operator's job was to find the actual fire.",
+    body:
+      "Before picking tools, the work was clarifying where time, money, or momentum was leaking.",
+    icon: Target,
+  },
+  {
+    title: "The first useful solution was practical and scoped.",
+    body:
+      "The win came from making the problem smaller, faster, or easier to manage - not from making the build more impressive.",
+    icon: Wrench,
+  },
 ]
 
-/* -------------------------------------------------------------------------- */
+const PREP_PROMPTS = [
+  "Your background and the kinds of businesses or teams you already understand.",
+  "A business process you have seen break down, slow people down, or create repeated manual work.",
+  "The direction you want this AI skill set to open for you next.",
+]
 
 export default function PostBookingNextStepsPage() {
   return (
     <main className="min-h-screen bg-[#FAFAF7] text-[#1A1A1A]">
-      {/* ── HERO ── */}
-      <section className="relative px-5 sm:px-8 pt-16 sm:pt-24 pb-10 sm:pb-16">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-crimson/10 text-crimson mb-5">
-            <CheckCircle2 className="w-4 h-4" />
-            <span className="text-xs font-mono uppercase tracking-wider">Your call is confirmed</span>
+      <section className="px-5 pb-10 pt-16 sm:px-8 sm:pb-14 sm:pt-24">
+        <div className="mx-auto max-w-4xl text-center">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full bg-crimson/10 px-3 py-1 text-crimson">
+            <CheckCircle2 className="h-4 w-4" />
+            <span className="font-mono text-xs uppercase tracking-wider">
+              Your call is confirmed
+            </span>
           </div>
-          <h1 className="font-playfair text-3xl sm:text-5xl md:text-6xl text-[#1A1A1A] mb-5 leading-[1.05]">
-            Excited to speak soon.<br />
-            <span className="italic text-crimson">Here&apos;s everything you need to prep.</span>
+
+          <h1 className="mb-5 font-playfair text-3xl leading-[1.05] text-[#1A1A1A] sm:text-5xl md:text-6xl">
+            You&apos;re booked.
+            <span className="block italic text-crimson">
+              Now let&apos;s make this useful.
+            </span>
           </h1>
-          <p className="text-base sm:text-lg text-[#4B5563] max-w-2xl mx-auto">
-            You&apos;ll find everything we&apos;ve sent to your inbox below —
-            plus the AI use cases, tool stack, and case studies from operators
-            already inside the Collective. Skim it before we talk.
+
+          <p className="mx-auto max-w-2xl text-base leading-relaxed text-[#4B5563] sm:text-lg">
+            Before we talk, skim a few real examples of the kind of practical
+            business problems AI Operators learn to spot. The goal is not to
+            collect tools. The goal is to build a skill set you can take into
+            real business conversations.
           </p>
         </div>
       </section>
 
-      {/* ── PREP CHECKLIST ── */}
-      <section className="px-5 sm:px-8 pb-12 sm:pb-16">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-2xl border border-[#E3E3E3] p-6 sm:p-10 shadow-sm">
-            <h2 className="font-playfair text-2xl sm:text-3xl text-[#1A1A1A] mb-6">
-              Three things to do right now
-            </h2>
-            <ol className="space-y-5">
-              <li className="flex gap-4">
-                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-crimson text-white flex items-center justify-center font-bold">
-                  1
-                </span>
-                <div>
-                  <p className="font-semibold text-[#1A1A1A] mb-1 flex items-center gap-2">
-                    <Calendar className="w-4 h-4 text-crimson" />
-                    RSVP to the calendar invite Calendly sent you.
-                  </p>
-                  <p className="text-sm text-[#4B5563]">
-                    Saved to your primary calendar — not a secondary one you
-                    never check. Need to reschedule? Use the link in your
-                    Calendly confirmation email.
-                  </p>
-                </div>
-              </li>
-              <li className="flex gap-4">
-                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-crimson text-white flex items-center justify-center font-bold">
-                  2
-                </span>
-                <div>
-                  <p className="font-semibold text-[#1A1A1A] mb-1 flex items-center gap-2">
-                    <Download className="w-4 h-4 text-crimson" />
-                    Read the AI Operator Playbook (in your inbox).
-                  </p>
-                  <p className="text-sm text-[#4B5563]">
-                    15 minutes, five chapters. If you haven&apos;t received it,
-                    check spam or reply to the confirmation email and we&apos;ll
-                    resend.
-                  </p>
-                </div>
-              </li>
-              <li className="flex gap-4">
-                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-crimson text-white flex items-center justify-center font-bold">
-                  3
-                </span>
-                <div>
-                  <p className="font-semibold text-[#1A1A1A] mb-1 flex items-center gap-2">
-                    <Target className="w-4 h-4 text-crimson" />
-                    Come with one specific blocker you want unblocked.
-                  </p>
-                  <p className="text-sm text-[#4B5563]">
-                    The best outcome of this call is you leaving with a
-                    concrete next move. Pick your biggest real stuck point so
-                    we can unstick it live.
-                  </p>
-                </div>
-              </li>
-            </ol>
+      <section className="px-5 pb-12 sm:px-8 sm:pb-16">
+        <div className="mx-auto max-w-4xl rounded-lg border border-[#E3E3E3] bg-white p-6 shadow-sm sm:p-8">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+            <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-lg bg-crimson/10 text-crimson">
+              <Calendar className="h-5 w-5" />
+            </div>
+            <div>
+              <p className="mb-1 font-mono text-xs uppercase tracking-wider text-crimson">
+                Do this first
+              </p>
+              <h2 className="mb-2 font-playfair text-2xl text-[#1A1A1A] sm:text-3xl">
+                Make sure the Calendly invite is on your calendar.
+              </h2>
+              <p className="text-sm leading-relaxed text-[#4B5563] sm:text-base">
+                Calendly sent the invite to your inbox. Add it to the calendar
+                you actually check, and use the reschedule link in that email if
+                the time needs to move.
+              </p>
+              <p className="mt-3 rounded-md border border-[#E3E3E3] bg-[#FAFAF7] px-3 py-2 text-xs leading-relaxed text-[#737373]">
+                Calendly also sent the invite to your inbox. If we add a
+                one-click calendar file later, it will live here.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── IT'S NOT TOO LATE ── clean light card, matches the rest of the
-          AOC palette (no more dark stripe). */}
-      <section className="px-5 sm:px-8 pb-12 sm:pb-16">
-        <div className="max-w-4xl mx-auto bg-white border border-[#E3E3E3] rounded-2xl p-8 sm:p-12 shadow-sm">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-crimson/10 text-crimson mb-4">
-            <Sparkles className="w-4 h-4" />
-            <span className="text-xs font-mono uppercase tracking-wider">
-              Real operators, real results
-            </span>
-          </div>
-          <h2 className="font-playfair text-2xl sm:text-4xl mb-4 leading-tight text-[#1A1A1A]">
-            It is not too late.
-            <span className="block italic text-crimson mt-1">
-              You&apos;re earlier than most W-2 professionals.
-            </span>
-          </h2>
-          <p className="text-[#4B5563] text-base sm:text-lg leading-relaxed max-w-2xl mb-4">
-            The first wave of &quot;AI operators&quot; was hype — consultants
-            selling AI courses about AI. The second wave is operators who
-            actually ship. Members in the Collective are real professionals
-            running their own work with these tools and sharing what&apos;s
-            working every week.
-          </p>
-          <p className="text-[#4B5563] text-base sm:text-lg leading-relaxed max-w-2xl">
-            You don&apos;t have to figure it out alone or bet your next move on
-            a LinkedIn thread. You learn alongside operators who are building
-            in real time.
-          </p>
-        </div>
-      </section>
-
-      {/* ── AI USE CASES BY INDUSTRY ── */}
-      <section className="px-5 sm:px-8 pb-12 sm:pb-16">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-5 pb-12 sm:px-8 sm:pb-16">
+        <div className="mx-auto max-w-6xl">
           <div className="mb-8 max-w-3xl">
-            <p className="text-xs font-mono uppercase tracking-wider text-crimson mb-2">
-              AI Use Cases by Niche
+            <p className="mb-2 font-mono text-xs uppercase tracking-wider text-crimson">
+              Practical examples
             </p>
-            <h2 className="font-playfair text-2xl sm:text-4xl text-[#1A1A1A] mb-4">
-              How operators in every niche are actually using AI.
+            <h2 className="mb-4 font-playfair text-2xl leading-tight text-[#1A1A1A] sm:text-4xl">
+              Three little fires a business was already feeling.
             </h2>
             <p className="text-[#4B5563]">
-              Not theoretical. Each of these is in production somewhere in the
-              Collective right now, with the hours saved to prove it.
+              These are entry-level examples on purpose. They are not about
+              showing off the most complicated AI stack. They are about seeing
+              the real business problem underneath the request.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {USE_CASES.map((uc, i) => (
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+            {CASE_STUDIES.map((study) => (
               <article
-                key={i}
-                className="bg-white rounded-xl border border-[#E3E3E3] p-5 hover:border-crimson/40 transition-colors flex flex-col"
+                key={study.company}
+                className="flex h-full flex-col rounded-lg border border-[#E3E3E3] bg-white p-5 shadow-sm transition-colors hover:border-crimson/40 sm:p-6"
               >
-                <div className="mb-3">
-                  <p className="text-[10px] font-mono uppercase tracking-wider text-crimson mb-1">
-                    {uc.niche}
+                <div className="mb-5 flex items-start gap-3">
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-crimson/10 text-crimson">
+                    <study.icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="font-mono text-[10px] uppercase tracking-wider text-crimson">
+                      {study.industry}
+                    </p>
+                    <h3 className="font-playfair text-2xl leading-tight text-[#1A1A1A]">
+                      {study.company}
+                    </h3>
+                  </div>
+                </div>
+
+                <p className="mb-5 text-lg font-semibold leading-snug text-[#1A1A1A]">
+                  {study.headline}
+                </p>
+
+                <div className="space-y-4 text-sm leading-relaxed">
+                  <div>
+                    <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-[#999]">
+                      The fire
+                    </p>
+                    <p className="text-[#4B5563]">{study.fire}</p>
+                  </div>
+                  <div>
+                    <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-[#999]">
+                      The fix
+                    </p>
+                    <p className="text-[#4B5563]">{study.fix}</p>
+                  </div>
+                  <div>
+                    <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-[#999]">
+                      What changed
+                    </p>
+                    <p className="text-[#1A1A1A]">{study.result}</p>
+                  </div>
+                </div>
+
+                <div className="mt-5 border-t border-[#F0F0F0] pt-4">
+                  <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-crimson">
+                    Operator lesson
                   </p>
-                  <h3 className="font-semibold text-[#1A1A1A] text-base leading-tight">
-                    {uc.title}
-                  </h3>
-                </div>
-
-                <div className="space-y-2 text-[13px] flex-1">
-                  <div>
-                    <span className="text-[9px] font-mono uppercase text-[#999] block mb-0.5 tracking-wider">
-                      Before
-                    </span>
-                    <p className="text-[#4B5563] leading-snug">{uc.before}</p>
-                  </div>
-                  <div>
-                    <span className="text-[9px] font-mono uppercase text-[#999] block mb-0.5 tracking-wider">
-                      After
-                    </span>
-                    <p className="text-[#1A1A1A] leading-snug">{uc.after}</p>
-                  </div>
-                </div>
-
-                <div className="mt-3 pt-3 border-t border-[#F0F0F0] flex flex-wrap gap-1">
-                  {uc.tools.map((t) => (
-                    <span
-                      key={t}
-                      className="text-[9px] font-mono uppercase tracking-wider px-1.5 py-0.5 bg-[#FAFAF7] text-[#4B5563] rounded border border-[#E3E3E3]"
-                    >
-                      {t}
-                    </span>
-                  ))}
+                  <p className="text-sm leading-relaxed text-[#4B5563]">
+                    {study.lesson}
+                  </p>
                 </div>
               </article>
             ))}
@@ -310,125 +231,28 @@ export default function PostBookingNextStepsPage() {
         </div>
       </section>
 
-      {/* ── TOOL STACK ── */}
-      <section className="px-5 sm:px-8 pb-12 sm:pb-16">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-8">
-            <p className="text-xs font-mono uppercase tracking-wider text-crimson mb-2">
-              The Operator Stack
+      <section className="px-5 pb-12 sm:px-8 sm:pb-16">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-7 max-w-3xl">
+            <p className="mb-2 font-mono text-xs uppercase tracking-wider text-crimson">
+              The pattern
             </p>
-            <h2 className="font-playfair text-2xl sm:text-4xl text-[#1A1A1A] mb-4">
-              12 tools Collective operators actually pay for.
-            </h2>
-            <p className="text-[#4B5563] max-w-2xl">
-              Picked by the operators using them in production — not by a
-              &quot;top 10&quot; post. The full 195-tool library is inside
-              the Collective.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-            {OPERATOR_TOOLS.map((tool) => (
-              <a
-                key={tool.name}
-                href={tool.url}
-                target="_blank"
-                rel="noreferrer"
-                className="group bg-white rounded-lg border border-[#E3E3E3] p-4 flex items-center gap-3 hover:border-crimson/40 hover:shadow-sm transition-all"
-              >
-                <ToolLogo name={tool.name} domain={tool.domain} />
-                <div className="flex-1 min-w-0">
-                  <p className="text-[10px] font-mono uppercase tracking-wider text-[#999] mb-0.5 truncate">
-                    {tool.category}
-                  </p>
-                  <p className="font-semibold text-[#1A1A1A] truncate group-hover:text-crimson transition-colors">
-                    {tool.name}
-                  </p>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── WHAT YOU GET ── */}
-      <section className="px-5 sm:px-8 pb-12 sm:pb-16">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-8 max-w-2xl">
-            <p className="text-xs font-mono uppercase tracking-wider text-crimson mb-2">
-              Inside the Collective
-            </p>
-            <h2 className="font-playfair text-2xl sm:text-4xl text-[#1A1A1A] mb-4">
-              What you get once you&apos;re in.
+            <h2 className="font-playfair text-2xl leading-tight text-[#1A1A1A] sm:text-4xl">
+              What these have in common.
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              {
-                icon: BookOpen,
-                title: "8-module operator curriculum",
-                body:
-                  "From first-offer sentence to closing month-one engagements — the full ramp, videos plus cheat sheets.",
-              },
-              {
-                icon: Wrench,
-                title: "195-tool scored library",
-                body:
-                  "Every tool Collective members have tried, with scorecards, pricing, and the exact workflow they run.",
-              },
-              {
-                icon: FileText,
-                title: "43 ready-to-ship templates",
-                body:
-                  "AI SEO pipeline, cold outbound engine, tier-1 support agent, ops automation — copy, configure, ship.",
-              },
-              {
-                icon: MessageCircle,
-                title: "7 cold email sequences",
-                body:
-                  "Verbatim sequences that are working right now across the portfolio. Swap ICP, send.",
-              },
-              {
-                icon: Users,
-                title: "Weekly operator calls",
-                body:
-                  "Wins, losses, and live teardowns. See what’s working this week — not what worked in 2023.",
-              },
-              {
-                icon: Zap,
-                title: "10 flagship SaaS teardowns",
-                body:
-                  "How 6 portfolio products were built, priced, and distributed — including the ones that failed.",
-              },
-              {
-                icon: BarChart3,
-                title: "52 agent + marketing skills",
-                body:
-                  "10 agents + 42 marketing skills across SEO, CRO, copy, paid, growth, sales, and strategy.",
-              },
-              {
-                icon: Video,
-                title: "30-day LinkedIn calendar",
-                body:
-                  "A full month of content prompts built for W-2 professionals repositioning as AI operators.",
-              },
-              {
-                icon: Sparkles,
-                title: "Every playbook as a PDF",
-                body:
-                  "Downloadable + printable. Read them offline on a plane, not squinting at a tab.",
-              },
-            ].map((item) => (
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {COMMON_THREADS.map((item) => (
               <div
                 key={item.title}
-                className="bg-white rounded-xl border border-[#E3E3E3] p-5 hover:border-crimson/30 transition-colors"
+                className="rounded-lg border border-[#E3E3E3] bg-white p-5 shadow-sm"
               >
-                <item.icon className="w-5 h-5 text-crimson mb-3" />
-                <h3 className="font-semibold text-[#1A1A1A] mb-1.5">
+                <item.icon className="mb-3 h-5 w-5 text-crimson" />
+                <h3 className="mb-2 font-semibold leading-snug text-[#1A1A1A]">
                   {item.title}
                 </h3>
-                <p className="text-sm text-[#4B5563] leading-snug">
+                <p className="text-sm leading-relaxed text-[#4B5563]">
                   {item.body}
                 </p>
               </div>
@@ -437,19 +261,44 @@ export default function PostBookingNextStepsPage() {
         </div>
       </section>
 
-      {/* ── FINAL STRIPE ── */}
-      <section className="px-5 sm:px-8 pb-16 sm:pb-24">
-        <div className="max-w-4xl mx-auto text-center bg-white rounded-2xl border border-[#E3E3E3] p-10 sm:p-14">
-          <TrendingUp className="w-8 h-8 text-crimson mx-auto mb-4" />
-          <h2 className="font-playfair text-2xl sm:text-4xl text-[#1A1A1A] mb-4">
-            See you on the call.
+      <section className="px-5 pb-16 sm:px-8 sm:pb-24">
+        <div className="mx-auto max-w-4xl rounded-lg border border-[#E3E3E3] bg-white p-7 shadow-sm sm:p-10">
+          <div className="mb-6 flex items-center gap-3 text-crimson">
+            <Clock3 className="h-5 w-5" />
+            <p className="font-mono text-xs uppercase tracking-wider">
+              For your call
+            </p>
+          </div>
+
+          <h2 className="mb-4 font-playfair text-2xl leading-tight text-[#1A1A1A] sm:text-4xl">
+            On the call, we&apos;ll talk through what this could look like for
+            you.
           </h2>
-          <p className="text-[#4B5563] max-w-xl mx-auto mb-6 text-base sm:text-lg">
-            Bookmark this page — we&apos;ll keep adding case studies,
-            playbooks, and tools here so your pre-call prep stays fresh.
+
+          <p className="mb-6 text-base leading-relaxed text-[#4B5563] sm:text-lg">
+            You do not need to show up with a perfect plan. Bring raw material:
+            what you have seen, what you are curious about, and where you want
+            this skill set to create more options.
           </p>
-          <p className="text-xs font-mono uppercase tracking-wider text-[#9CA3AF]">
-            AI Operator Collective · aioperatorcollective.com
+
+          <div className="space-y-3">
+            {PREP_PROMPTS.map((prompt) => (
+              <div
+                key={prompt}
+                className="flex gap-3 rounded-md border border-[#E3E3E3] bg-[#FAFAF7] p-3"
+              >
+                <ArrowRight className="mt-0.5 h-4 w-4 flex-shrink-0 text-crimson" />
+                <p className="text-sm leading-relaxed text-[#4B5563]">
+                  {prompt}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-7 text-sm leading-relaxed text-[#737373]">
+            We will use that conversation to see whether AIOC is the right next
+            room for you, and what the first practical shape of this work could
+            be.
           </p>
         </div>
       </section>
