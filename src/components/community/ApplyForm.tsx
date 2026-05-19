@@ -481,8 +481,15 @@ export function ApplyForm() {
 
     // Booking-complete listener — redirect to next-steps page.
     const onMessage = (e: MessageEvent) => {
-      const data = e.data as { event?: string }
+      const data = e.data as {
+        event?: string
+        payload?: {
+          event?: { uri?: string }
+          invitee?: { uri?: string }
+        }
+      }
       if (
+        e.origin === "https://calendly.com" &&
         typeof data === "object" &&
         data?.event === "calendly.event_scheduled"
       ) {
@@ -490,9 +497,15 @@ export function ApplyForm() {
         const query = new URLSearchParams({
           email: email.trim().toLowerCase(),
           name: `${firstName.trim()} ${lastName.trim()}`.trim(),
-        }).toString()
+        })
+        if (data.payload?.event?.uri) {
+          query.set("calendlyEventUri", data.payload.event.uri)
+        }
+        if (data.payload?.invitee?.uri) {
+          query.set("calendlyInviteeUri", data.payload.invitee.uri)
+        }
         setTimeout(() => {
-          window.location.href = `/apply/next-steps?${query}`
+          window.location.href = `/apply/next-steps?${query.toString()}`
         }, 600)
       }
     }

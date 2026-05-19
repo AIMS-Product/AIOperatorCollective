@@ -4,6 +4,7 @@ import {
   Calendar,
   CheckCircle2,
   Clock3,
+  Download,
   Flame,
   Search,
   Target,
@@ -101,7 +102,27 @@ const PREP_PROMPTS = [
   "The direction you want this AI skill set to open for you next.",
 ]
 
-export default function PostBookingNextStepsPage() {
+type SearchParams = Promise<Record<string, string | string[] | undefined>>
+
+function firstParam(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] : value
+}
+
+function calendarDownloadHref(eventUri: string | undefined) {
+  if (!eventUri) return null
+
+  const params = new URLSearchParams({ eventUri })
+  return `/api/calendly/calendar?${params.toString()}`
+}
+
+export default async function PostBookingNextStepsPage({
+  searchParams,
+}: {
+  searchParams: SearchParams
+}) {
+  const params = await searchParams
+  const calendarHref = calendarDownloadHref(firstParam(params.calendlyEventUri))
+
   return (
     <main className="min-h-screen bg-[#FAFAF7] text-[#1A1A1A]">
       <section className="px-5 pb-10 pt-16 sm:px-8 sm:pb-14 sm:pt-24">
@@ -147,10 +168,30 @@ export default function PostBookingNextStepsPage() {
                 you actually check, and use the reschedule link in that email if
                 the time needs to move.
               </p>
-              <p className="mt-3 rounded-md border border-[#E3E3E3] bg-[#FAFAF7] px-3 py-2 text-xs leading-relaxed text-[#737373]">
-                Calendly also sent the invite to your inbox. If we add a
-                one-click calendar file later, it will live here.
-              </p>
+              <div className="mt-4 rounded-md border border-[#E3E3E3] bg-[#FAFAF7] p-3">
+                {calendarHref ? (
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <p className="text-xs leading-relaxed text-[#737373]">
+                      Calendly also sent the invite to your inbox. This button
+                      downloads a backup calendar file for the call.
+                    </p>
+                    <a
+                      href={calendarHref}
+                      download
+                      className="inline-flex items-center justify-center gap-2 rounded-md bg-crimson px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-crimson/90"
+                    >
+                      <Download className="h-4 w-4" />
+                      Add to calendar
+                    </a>
+                  </div>
+                ) : (
+                  <p className="text-xs leading-relaxed text-[#737373]">
+                    Calendly also sent the invite to your inbox. If this page
+                    was opened without booking details, use the calendar link in
+                    that email.
+                  </p>
+                )}
+              </div>
             </div>
           </div>
         </div>
