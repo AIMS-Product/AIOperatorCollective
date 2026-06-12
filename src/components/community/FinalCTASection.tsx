@@ -38,13 +38,13 @@ export function FinalCTASection() {
             href={APPLY_URL}
             className="group inline-flex items-center justify-center gap-2 rounded-md bg-crimson text-white px-7 py-4 text-sm font-bold uppercase tracking-wider hover:bg-crimson-dark transition-all shadow-[0_8px_24px_-4px_rgba(153,27,27,0.35)]"
           >
-            Apply Now
+            See if AIOC is the right fit
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
         </div>
 
         <p className="mt-6 text-xs text-[#737373] font-mono uppercase tracking-wider">
-          No payment to apply · Application-only · 10 seats per cohort
+          No payment to apply · Application-only · 10 seats per cohort · Next cohort starts the first week of July
         </p>
       </div>
     </section>

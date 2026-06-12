@@ -18,6 +18,13 @@ export function ProblemStakes() {
         </h2>
 
         <div className="mt-8 space-y-5 text-base sm:text-lg text-neutral-600 leading-relaxed">
+          <p>
+            You might be the person who already tinkers with this stuff: a custom
+            GPT, a script that fills in the report nobody likes, an automation you
+            never mentioned because it works a little too well. You might not call
+            that building. We would. And with layoffs spreading, better to be the
+            person aiming this technology than the person it surprises.
+          </p>
           <p>AI tutorials show clean examples.</p>
           <p>
             Real businesses hand you messy ones: the report nobody trusts, the handoff
@@ -25,7 +32,9 @@ export function ProblemStakes() {
             question answered from scratch again.
           </p>
           <p>
-            Most businesses do not know which of those problems AI can help fix yet.
+            And right now, every CEO knows they should be doing more with AI, knows
+            they could be, and doesn&apos;t know where to start. They are actively
+            looking for someone who can walk in and help.
           </p>
           <p className="text-neutral-900 font-medium">That is where operators matter.</p>
           <p>
