@@ -75,7 +75,9 @@ export function GuideGate({ meta, children }: GuideGateProps) {
       }
 
       try {
-        localStorage.setItem(storageKey, value)
+        // Store a non-PII flag, not the email. The unlock check only tests for
+        // the key's existence, so there is no reason to keep PII in the browser.
+        localStorage.setItem(storageKey, "1")
       } catch {
         // Non-fatal: they still get the reveal this session.
       }
