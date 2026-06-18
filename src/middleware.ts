@@ -116,6 +116,10 @@ const isPublicRoute = createRouteMatcher([
   "/api/admin/test-emails(.*)",
   "/api/lead-magnets/submit(.*)",
   "/api/lead-magnets/ai-playbook(.*)",
+  // Email-gated lead-magnet guides — public landing pages + their capture
+  // endpoint. Anonymous visitors read the teaser, submit an email, unlock.
+  "/guide(.*)",
+  "/api/lead-magnets/guide(.*)",
   // Whitelabel tenant-page lead capture — public by design.
   "/api/tenant/lead(.*)",
   // Public checkout — self-handles auth (returns 401 with sign-in URL
