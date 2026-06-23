@@ -149,7 +149,7 @@ export async function sendTrackedEmail(
   return result
 }
 
-import { buildUnsubscribeUrl } from "@/app/api/unsubscribe/route"
+import { buildUnsubscribeUrl } from "@/lib/unsubscribe"
 import { AIMS_FROM_EMAIL as FROM_EMAIL, AIMS_REPLY_TO as REPLY_TO } from "./senders"
 
 // ─── Branded HTML wrapper ─────────────────────────────────────────────────────
