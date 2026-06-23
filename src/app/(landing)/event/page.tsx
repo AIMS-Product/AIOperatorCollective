@@ -55,7 +55,7 @@ export default function EventPage() {
           className="absolute inset-0 bg-cover bg-center opacity-90"
           style={{
             backgroundImage:
-              "linear-gradient(180deg, rgba(26,26,26,0.72), rgba(26,26,26,0.92)), url('https://picsum.photos/seed/ai-business-workshop/1920/1280')",
+              "linear-gradient(180deg, rgba(26,26,26,0.72), rgba(26,26,26,0.92)), url('/og-image.png')",
           }}
           aria-hidden
         />
@@ -69,7 +69,7 @@ export default function EventPage() {
             Find the little fires{" "}
             <span
               className="mx-1 inline-block h-10 w-24 rounded-full bg-cover bg-center align-middle shadow-[0_12px_40px_-20px_rgba(255,255,255,0.9)] grayscale contrast-125 sm:h-12 sm:w-32"
-              style={{ backgroundImage: "url('https://picsum.photos/seed/operator-fire/400/180')" }}
+              style={{ backgroundImage: "url('/logo.png')" }}
               aria-hidden
             />
             inside a business.
@@ -119,7 +119,7 @@ export default function EventPage() {
           <div className="group overflow-hidden rounded-md border border-line bg-white md:col-span-7">
             <div
               className="h-64 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
-              style={{ backgroundImage: "url('https://picsum.photos/seed/business-ops-map/1200/700')" }}
+              style={{ backgroundImage: "url('/og-image.png')" }}
               aria-hidden
             />
           </div>
@@ -190,4 +190,3 @@ export default function EventPage() {
     </main>
   )
 }
-
