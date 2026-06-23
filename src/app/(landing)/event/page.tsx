@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -50,15 +49,13 @@ const speakers = [
     role: "AIMS strategy, operations, and product",
     body: "Jess works across strategy, operations, and product inside AIMS. Her lens is practical: where AI can create leverage, where it creates noise, and what kind of judgment makes someone useful to a real business.",
     initials: "JM",
-    image: "/operators/jess-mayo.jpeg",
   },
   {
     icon: Mic2,
     name: "Mike Hoffmann",
     role: "CEO and AIMS client",
     body: "Mike brings the buyer and operator view: what SMB leaders actually care about, what feels risky, and what makes AI help credible instead of theoretical.",
-    image: "/operators/mike-hoffmann.jpg",
-    initials: null,
+    initials: "MH",
   },
 ];
 
@@ -147,13 +144,12 @@ export default function EventPage() {
               {AIOC_WEBINAR_EVENT.eyebrow}
             </p>
             <h1 className="mt-5 max-w-5xl font-serif text-[clamp(3rem,5.8vw,5.9rem)] leading-[0.96] text-ink">
-              AI at work, without the theater.
+              Your AI judgment can solve real business problems.
             </h1>
             <p className="mt-7 max-w-3xl text-lg leading-8 text-[#4B5563] sm:text-xl">
-              Jess Mayo sits down with Mike Hoffmann to unpack what small
-              businesses actually need from AI: better diagnosis, clearer
-              tradeoffs, and people who can turn operational bottlenecks into
-              useful systems.
+              If you already tinker with AI, this conversation shows what makes
+              that ability useful to a real business: spotting the bottleneck,
+              asking better questions, and knowing what is worth building.
             </p>
 
             <div className="mt-9 flex">
@@ -170,25 +166,12 @@ export default function EventPage() {
           <aside id="register" className="scroll-mt-28 lg:pt-7">
             <EventRegistrationForm />
             <div className="mt-4 overflow-hidden rounded-md border border-line bg-white">
-              <div className="grid grid-cols-[124px_1fr]">
-                <div className="grid min-h-24 grid-cols-2 bg-ink">
-                  <div className="relative">
-                    <Image
-                      src="/operators/jess-mayo.jpeg"
-                      alt="Jess Mayo"
-                      fill
-                      sizes="62px"
-                      className="object-cover grayscale"
-                    />
-                  </div>
-                  <div className="relative border-l border-white/15">
-                    <Image
-                      src="/operators/mike-hoffmann.jpg"
-                      alt="Mike Hoffmann"
-                      fill
-                      sizes="62px"
-                      className="object-cover grayscale"
-                    />
+              <div className="grid grid-cols-[104px_1fr]">
+                <div className="grid min-h-24 place-items-center bg-ink px-4 text-center">
+                  <div className="font-mono text-xs font-bold uppercase tracking-[0.22em] text-white">
+                    JM
+                    <span className="mx-1 text-crimson-light">+</span>
+                    MH
                   </div>
                 </div>
                 <div className="p-4">
@@ -196,8 +179,8 @@ export default function EventPage() {
                     Live with Jess and Mike
                   </p>
                   <p className="mt-2 text-sm leading-6 text-[#4B5563]">
-                    A buyer/operator view on what makes AI credible inside real
-                    SMB work.
+                    A buyer/operator view on where your AI instincts become
+                    credible inside real SMB work.
                   </p>
                 </div>
               </div>
@@ -305,21 +288,9 @@ export default function EventPage() {
                         {speaker.name}
                       </h3>
                     </div>
-                    {speaker.image ? (
-                      <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-md border border-white/15">
-                        <Image
-                          src={speaker.image}
-                          alt={speaker.name}
-                          fill
-                          sizes="80px"
-                          className="object-cover grayscale transition-transform duration-700 group-hover:scale-105"
-                        />
-                      </div>
-                    ) : (
-                      <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-md border border-white/15 bg-white/[0.06] font-serif text-2xl text-white/80">
-                        {speaker.initials}
-                      </div>
-                    )}
+                    <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-md border border-white/15 bg-white/[0.06] font-serif text-2xl text-white/80 transition-colors group-hover:border-crimson/40">
+                      {speaker.initials}
+                    </div>
                   </div>
                   <p className="mt-4 text-sm font-semibold uppercase tracking-[0.12em] text-white/48">
                     {speaker.role}
