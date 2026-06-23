@@ -93,6 +93,7 @@ const isPublicRoute = createRouteMatcher([
   "/why-aims(.*)",
   "/blog(.*)",
   "/get-started(.*)",
+  "/event(.*)",
   "/thank-you(.*)",
   "/crm-onboarding(.*)",
   "/solutions(.*)",
@@ -139,6 +140,7 @@ const isPublicRoute = createRouteMatcher([
   "/apply(.*)",
   "/api/community/lead(.*)",
   "/api/community/apply(.*)",
+  "/api/community/event(.*)",
   "/api/unsubscribe(.*)",
   // Public branded booking pages — anonymous visitors pick a slot,
   // POST a booking. Auth happens inside the route handler.
