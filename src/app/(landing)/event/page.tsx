@@ -156,19 +156,13 @@ export default function EventPage() {
               useful systems.
             </p>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-9 flex">
               <Link
                 href="#register"
                 className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-crimson px-6 text-sm font-bold uppercase tracking-wider text-white shadow-[0_12px_32px_-18px_rgba(152,27,27,0.9)] transition-colors hover:bg-crimson-dark"
               >
                 Save my seat
                 <ArrowRight className="h-4 w-4" aria-hidden />
-              </Link>
-              <Link
-                href="#agenda"
-                className="inline-flex h-12 items-center justify-center rounded-md border border-[#D7D7D2] bg-white px-6 text-sm font-bold uppercase tracking-wider text-ink transition-colors hover:border-crimson/35 hover:bg-crimson/5"
-              >
-                See the plan
               </Link>
             </div>
           </div>
