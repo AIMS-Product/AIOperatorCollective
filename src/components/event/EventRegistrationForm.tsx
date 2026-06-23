@@ -5,9 +5,18 @@ import { useState } from "react"
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react"
 import { AIOC_WEBINAR_EVENT } from "@/lib/marketing/webinar-event"
 
+const audienceOptions = [
+  { value: "technical-ish-professional", label: "Technical-ish professional" },
+  { value: "operator-generalist", label: "Operator / generalist" },
+  { value: "business-owner", label: "Business owner" },
+  { value: "marketer-sales", label: "Marketing / sales" },
+  { value: "other", label: "Other" },
+]
+
 export function EventRegistrationForm() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
+  const [audienceSegment, setAudienceSegment] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [registered, setRegistered] = useState(false)
@@ -18,8 +27,18 @@ export function EventRegistrationForm() {
     const trimmedEmail = email.trim().toLowerCase()
     const trimmedName = name.trim()
 
+    if (!trimmedName) {
+      setError("Please enter your first name.")
+      return
+    }
+
     if (!trimmedEmail || !trimmedEmail.includes("@")) {
       setError("Please enter a valid email address.")
+      return
+    }
+
+    if (!audienceSegment) {
+      setError("Please choose the option that best describes you.")
       return
     }
 
@@ -33,7 +52,8 @@ export function EventRegistrationForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: trimmedEmail,
-          name: trimmedName || undefined,
+          name: trimmedName,
+          audienceSegment,
           eventSlug: AIOC_WEBINAR_EVENT.slug,
           utmSource: params.get("utm_source") ?? undefined,
           utmMedium: params.get("utm_medium") ?? undefined,
@@ -60,9 +80,9 @@ export function EventRegistrationForm() {
         <div className="flex items-start gap-3">
           <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-crimson" aria-hidden />
           <div>
-            <h2 className="font-serif text-2xl leading-tight text-ink">You&apos;re registered.</h2>
+            <h2 className="font-serif text-2xl leading-tight text-ink">You&apos;re in.</h2>
             <p className="mt-3 text-sm leading-6 text-[#4B5563]">
-              We&apos;ll send the time, access link, and any prep notes to {email.trim()}.
+              We&apos;ll send the live access link, reminders, and any prep notes to {email.trim()}.
             </p>
           </div>
         </div>
@@ -76,13 +96,30 @@ export function EventRegistrationForm() {
       className="rounded-md border border-white/20 bg-white p-5 text-ink shadow-[0_24px_90px_-50px_rgba(26,26,26,0.85)] sm:p-6"
     >
       <div>
-        <h2 className="font-serif text-2xl leading-tight">Save your spot</h2>
+        <h2 className="font-serif text-2xl leading-tight">Save your seat</h2>
         <p className="mt-2 text-sm leading-6 text-[#4B5563]">
-          Register with email only. Add your name if you want the reminder personalized.
+          Use the email where you want the access link. The qualifier helps us keep the room useful.
         </p>
       </div>
 
       <div className="mt-6 space-y-3">
+        <label htmlFor="event-name" className="sr-only">
+          First name
+        </label>
+        <input
+          id="event-name"
+          type="text"
+          autoComplete="given-name"
+          placeholder="First name"
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value)
+            if (error) setError(null)
+          }}
+          className="h-12 w-full rounded-md border border-[#E3E3E3] bg-white px-4 text-base text-ink placeholder:text-[#9CA3AF] focus:border-crimson focus:outline-none focus:ring-2 focus:ring-crimson/15"
+          required
+        />
+
         <label htmlFor="event-email" className="sr-only">
           Email
         </label>
@@ -103,18 +140,26 @@ export function EventRegistrationForm() {
           required
         />
 
-        <label htmlFor="event-name" className="sr-only">
-          First name
+        <label htmlFor="event-audience" className="sr-only">
+          Which best describes you?
         </label>
-        <input
-          id="event-name"
-          type="text"
-          autoComplete="given-name"
-          placeholder="First name (optional)"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+        <select
+          id="event-audience"
+          value={audienceSegment}
+          onChange={(e) => {
+            setAudienceSegment(e.target.value)
+            if (error) setError(null)
+          }}
           className="h-12 w-full rounded-md border border-[#E3E3E3] bg-white px-4 text-base text-ink placeholder:text-[#9CA3AF] focus:border-crimson focus:outline-none focus:ring-2 focus:ring-crimson/15"
-        />
+          required
+        >
+          <option value="">Which best describes you?</option>
+          {audienceOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
       </div>
 
       {error ? (
@@ -132,15 +177,15 @@ export function EventRegistrationForm() {
           <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
         ) : (
           <>
-            Register
+            Save my seat
             <ArrowRight className="h-4 w-4" aria-hidden />
           </>
         )}
       </button>
 
       <p className="mt-4 text-xs leading-5 text-[#737373]">
-        No payment to register. We&apos;ll use this email for the webinar details and relevant AIOC
-        follow-up.
+        No payment to register. We&apos;ll use this email for webinar details
+        and relevant AIOC follow-up.
       </p>
     </form>
   )
