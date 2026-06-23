@@ -11,6 +11,15 @@ const schema = z.object({
   email: z.string().email().max(180),
   eventSlug: z.literal(AIOC_WEBINAR_EVENT.slug),
   name: z.string().max(120).optional(),
+  audienceSegment: z
+    .enum([
+      "technical-ish-professional",
+      "operator-generalist",
+      "business-owner",
+      "marketer-sales",
+      "other",
+    ])
+    .optional(),
   utmSource: z.string().max(60).optional(),
   utmMedium: z.string().max(60).optional(),
   utmCampaign: z.string().max(60).optional(),
@@ -33,7 +42,7 @@ export async function POST(req: Request) {
       )
     }
 
-    const { email, name, utmSource, utmMedium, utmCampaign } = parsed.data
+    const { email, name, audienceSegment, utmSource, utmMedium, utmCampaign } = parsed.data
     const contactName = name?.trim() || email.split("@")[0]
     const source = `event:${AIOC_WEBINAR_EVENT.slug}`
 
@@ -74,7 +83,16 @@ export async function POST(req: Request) {
           activities: {
             create: {
               type: "FORM_SUBMITTED",
-              detail: `${contactName} (${email}) registered for ${AIOC_WEBINAR_EVENT.dateLabel}`,
+              detail: `${contactName} (${email}) registered for ${AIOC_WEBINAR_EVENT.dateLabel}${
+                audienceSegment ? ` as ${audienceSegment}` : ""
+              }`,
+              metadata: {
+                eventSlug: AIOC_WEBINAR_EVENT.slug,
+                audienceSegment: audienceSegment ?? null,
+                utmSource: utmSource ?? null,
+                utmMedium: utmMedium ?? null,
+                utmCampaign: utmCampaign ?? null,
+              },
             },
           },
         },
@@ -119,4 +137,3 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Internal error" }, { status: 500 })
   }
 }
-
