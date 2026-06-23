@@ -111,32 +111,72 @@ export const metadata: Metadata = {
   },
 }
 
+function AbstractEventBackground() {
+  return (
+    <div className="absolute inset-0" aria-hidden>
+      <div className="absolute inset-0 bg-[#171514]" />
+      <div
+        className="absolute inset-0 opacity-[0.2]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.11) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.09) 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
+        }}
+      />
+      <div className="absolute left-1/2 top-10 h-[620px] w-[min(1120px,92vw)] -translate-x-1/2 rounded-[32px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.11),rgba(255,255,255,0.03)_45%,rgba(196,36,36,0.16))] shadow-[0_45px_150px_-95px_rgba(196,36,36,0.95)]" />
+      <div className="absolute left-1/2 top-20 hidden h-[520px] w-[min(980px,86vw)] -translate-x-1/2 overflow-hidden rounded-[28px] border border-white/10 bg-black/10 md:block">
+        <div className="absolute inset-x-8 top-8 h-px bg-white/15" />
+        <div className="absolute inset-y-8 left-1/3 w-px bg-white/10" />
+        <div className="absolute inset-y-8 right-1/3 w-px bg-white/10" />
+        <div className="absolute left-[7%] top-[18%] h-16 w-48 rounded-md border border-white/15 bg-white/[0.08]" />
+        <div className="absolute left-[39%] top-[14%] h-24 w-60 rounded-md border border-crimson/35 bg-crimson/15" />
+        <div className="absolute right-[8%] top-[21%] h-14 w-44 rounded-md border border-white/15 bg-white/[0.07]" />
+        <div className="absolute left-[18%] top-[45%] h-20 w-56 rounded-md border border-white/15 bg-white/[0.07]" />
+        <div className="absolute right-[22%] top-[47%] h-20 w-64 rounded-md border border-white/15 bg-white/[0.09]" />
+        <div className="absolute left-[11%] bottom-[16%] h-14 w-48 rounded-md border border-white/15 bg-white/[0.06]" />
+        <div className="absolute right-[10%] bottom-[14%] h-16 w-52 rounded-md border border-crimson/25 bg-crimson/10" />
+        <div className="absolute left-[22%] top-[31%] h-px w-[56%] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+        <div className="absolute left-[28%] top-[58%] h-px w-[48%] bg-gradient-to-r from-transparent via-crimson/45 to-transparent" />
+      </div>
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(23,21,20,0.48),rgba(23,21,20,0.92))]" />
+    </div>
+  )
+}
+
+function DiagnosticMapPreview() {
+  return (
+    <div className="relative h-full w-full overflow-hidden bg-[#171514]" aria-hidden>
+      <div
+        className="absolute inset-0 opacity-[0.25]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
+          backgroundSize: "44px 44px",
+        }}
+      />
+      <div className="absolute left-8 right-8 top-8 h-px bg-white/18" />
+      <div className="absolute bottom-8 left-8 right-8 h-px bg-white/12" />
+      <div className="absolute left-8 top-14 h-14 w-44 rounded-md border border-white/15 bg-white/[0.08]" />
+      <div className="absolute left-[34%] top-10 h-24 w-56 rounded-md border border-crimson/35 bg-crimson/15" />
+      <div className="absolute right-8 top-20 h-16 w-40 rounded-md border border-white/15 bg-white/[0.07]" />
+      <div className="absolute bottom-16 left-16 h-16 w-48 rounded-md border border-white/15 bg-white/[0.06]" />
+      <div className="absolute bottom-12 right-14 h-20 w-56 rounded-md border border-crimson/25 bg-crimson/10" />
+      <div className="absolute left-[20%] top-[48%] h-px w-[60%] bg-gradient-to-r from-transparent via-white/35 to-transparent" />
+    </div>
+  )
+}
+
 export default function EventPage() {
   return (
     <main className="w-full max-w-full overflow-x-hidden bg-white text-ink">
-      <section className="relative overflow-hidden bg-ink text-white">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-90"
-          style={{
-            backgroundImage:
-              "linear-gradient(180deg, rgba(26,26,26,0.72), rgba(26,26,26,0.92)), url('/og-image.png')",
-          }}
-          aria-hidden
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(196,36,36,0.35),transparent_44%)]" aria-hidden />
-
+      <section className="relative overflow-hidden bg-[#171514] text-white">
+        <AbstractEventBackground />
         <div className="relative mx-auto flex w-full max-w-7xl flex-col items-center px-5 py-16 text-center sm:px-6 sm:py-20 lg:px-8 lg:py-24">
           <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-white/75">
             {AIOC_WEBINAR_EVENT.eyebrow}
           </p>
           <h1 className="mt-5 max-w-6xl font-serif text-[clamp(3rem,6vw,5.8rem)] leading-[0.96] text-white">
-            AI In The Workplace:{" "}
-            <span
-              className="mx-1 inline-block h-10 w-24 rounded-full bg-cover bg-center align-middle shadow-[0_12px_40px_-20px_rgba(255,255,255,0.9)] grayscale contrast-125 sm:h-12 sm:w-32"
-              style={{ backgroundImage: "url('/logo.png')" }}
-              aria-hidden
-            />
-            What Small Businesses Actually Need
+            AI In The Workplace: What Small Businesses Actually Need
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-8 text-white/82 sm:text-xl">
             Jess Mayo sits down with Mike Hoffmann, a CEO and AIMS client with multiple businesses,
@@ -184,11 +224,9 @@ export default function EventPage() {
           </div>
 
           <div className="group overflow-hidden rounded-md border border-line bg-white md:col-span-7">
-            <div
-              className="h-64 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
-              style={{ backgroundImage: "url('/og-image.png')" }}
-              aria-hidden
-            />
+            <div className="h-64 transition-transform duration-700 ease-out group-hover:scale-105">
+              <DiagnosticMapPreview />
+            </div>
           </div>
 
           {details.map((item) => {
