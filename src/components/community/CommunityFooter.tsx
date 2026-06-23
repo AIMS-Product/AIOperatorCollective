@@ -1,8 +1,15 @@
-import Image from "next/image"
-import Link from "next/link"
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { isDistractionFreeLandingPath } from "@/lib/landing-page-rules";
 
 export function CommunityFooter() {
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
+  const pathname = usePathname();
+  const distractionFree = isDistractionFreeLandingPath(pathname);
+
   return (
     <footer className="border-t border-[#E3E3E3] bg-[#F5F5F5] texture-light">
       <div className="relative z-10 mx-auto max-w-[1280px] px-6 py-12">
@@ -25,26 +32,46 @@ export function CommunityFooter() {
             </div>
           </div>
 
-          <nav className="flex max-w-full flex-wrap items-center justify-center gap-x-5 gap-y-3 text-center text-xs font-mono uppercase tracking-wider text-[#737373]">
-            <Link href="/#program" className="hover:text-[#1A1A1A] transition-colors">
-              Program
-            </Link>
-            <Link href="/#mentors" className="hover:text-[#1A1A1A] transition-colors">
-              Mentors
-            </Link>
-            <Link href="/#faq" className="hover:text-[#1A1A1A] transition-colors">
-              FAQ
-            </Link>
-            <Link href="/#disclosures" className="hover:text-[#1A1A1A] transition-colors">
-              Disclosures
-            </Link>
-            <Link href="/privacy" className="hover:text-[#1A1A1A] transition-colors">
-              Privacy
-            </Link>
-            <Link href="/terms" className="hover:text-[#1A1A1A] transition-colors">
-              Terms
-            </Link>
-          </nav>
+          {distractionFree ? null : (
+            <nav className="flex max-w-full flex-wrap items-center justify-center gap-x-5 gap-y-3 text-center text-xs font-mono uppercase tracking-wider text-[#737373]">
+              <Link
+                href="/#program"
+                className="hover:text-[#1A1A1A] transition-colors"
+              >
+                Program
+              </Link>
+              <Link
+                href="/#mentors"
+                className="hover:text-[#1A1A1A] transition-colors"
+              >
+                Mentors
+              </Link>
+              <Link
+                href="/#faq"
+                className="hover:text-[#1A1A1A] transition-colors"
+              >
+                FAQ
+              </Link>
+              <Link
+                href="/#disclosures"
+                className="hover:text-[#1A1A1A] transition-colors"
+              >
+                Disclosures
+              </Link>
+              <Link
+                href="/privacy"
+                className="hover:text-[#1A1A1A] transition-colors"
+              >
+                Privacy
+              </Link>
+              <Link
+                href="/terms"
+                className="hover:text-[#1A1A1A] transition-colors"
+              >
+                Terms
+              </Link>
+            </nav>
+          )}
         </div>
 
         <div className="mt-10 pt-6 border-t border-[#E3E3E3] text-center text-[11px] font-mono uppercase tracking-wider text-[#737373]/60">
@@ -54,5 +81,5 @@ export function CommunityFooter() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
