@@ -64,34 +64,39 @@ const speakers = [
 
 const agenda = [
   {
-    title: "Set the frame",
-    time: "0-5 min",
-    body: "This is not a tool demo. AI is gasoline. The business problem is the fire.",
+    title: "Getting started",
+    time: "0-3 min",
+    body: "This is not an AI tool demo. It is a real conversation about what AI looks like inside SMB operations. AI is gasoline. The business problem is the fire.",
   },
   {
     title: "Mike's before state",
-    time: "5-15 min",
-    body: "What AI looked like from the CEO seat, where the uncertainty was, and which problems seemed worth solving.",
+    time: "3-10 min",
+    body: "Mike shares what felt promising, confusing, or risky from the CEO seat, where the business actually had friction, and why generic AI solutions were not enough.",
   },
   {
-    title: "What AIMS diagnosed",
-    time: "15-30 min",
-    body: "The bottleneck map: repeated tasks, handoff gaps, lost time, missed follow-up, and decision drag.",
+    title: "What AIMS diagnosed first",
+    time: "10-20 min",
+    body: "Jess shows how an operator looks for repeated tasks, handoff gaps, slow follow-up, decision bottlenecks, and work that depends too much on one person.",
   },
   {
-    title: "What changed",
-    time: "30-42 min",
-    body: "What became clearer, faster, or easier at a category level, without exposing private implementation details.",
+    title: "What changed for Mike",
+    time: "20-30 min",
+    body: "A grounded look at what became clearer, faster, easier, or more visible, without over-sharing private implementation details.",
   },
   {
     title: "The SMB opportunity",
-    time: "42-52 min",
-    body: "Why SMBs need people who can diagnose valuable problems, scope useful systems, and explain tradeoffs.",
+    time: "30-37 min",
+    body: "Why small businesses do not need AI theater, why judgment is becoming more valuable, and why AIOC is built for people who want to become credible AI Operators.",
   },
   {
     title: "AIOC Cohort 1",
-    time: "52-60 min",
-    body: "Who the cohort is for, why we are accepting 10 people for July, and what happens after applying.",
+    time: "37-43 min",
+    body: "Who Cohort 1 is for, why we are accepting 10 people, what they will practice, what happens after applying, and what AIOC does not guarantee.",
+  },
+  {
+    title: "Close and action",
+    time: "43-45 min",
+    body: "Apply if this made the path feel right. We will review applications and use the fit call to make sure the room is right.",
   },
 ];
 
@@ -345,12 +350,12 @@ export default function EventPage() {
               Run of show
             </p>
             <h2 className="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl">
-              Sixty minutes on what actually makes AI useful at work.
+              Forty-five minutes on how useful AI work actually gets found.
             </h2>
             <p className="mt-6 text-base leading-7 text-[#4B5563]">
-              We will keep it focused: a real case-study conversation, the SMB
-              opportunity, then a clear invitation to apply for AIOC Cohort 1 if
-              the fit is there.
+              We will keep it tight: Mike&apos;s before state, what AIMS
+              diagnosed first, what changed at a category level, and how Cohort
+              1 works if the path feels right.
             </p>
           </div>
 
@@ -384,8 +389,11 @@ export default function EventPage() {
               Before you register
             </p>
             <h2 className="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl">
-              Clear expectations, no magic-story fog.
+              What this is, what it is not, and who it is for.
             </h2>
+            <p className="mt-5 text-base leading-7 text-[#4B5563]">
+              No hype, no income promises, just a useful room.
+            </p>
           </div>
 
           <div className="grid gap-3">
@@ -417,7 +425,7 @@ export default function EventPage() {
       <section className="px-5 pb-24 sm:px-6 sm:pb-32 lg:px-8">
         <div className="mx-auto max-w-6xl rounded-md bg-crimson px-6 py-12 text-center text-white sm:px-10 sm:py-16">
           <h2 className="mx-auto max-w-4xl font-serif text-4xl leading-tight sm:text-5xl">
-            If this makes the path feel more real, apply for Cohort 1 next.
+            If this makes the path feel right, apply for Cohort 1 next.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/78">
             We are accepting 10 people for July and using the application plus
