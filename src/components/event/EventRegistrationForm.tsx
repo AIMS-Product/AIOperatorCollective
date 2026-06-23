@@ -2,6 +2,7 @@
 
 import type { FormEvent } from "react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import { AIOC_WEBINAR_EVENT } from "@/lib/marketing/webinar-event";
 
@@ -14,6 +15,7 @@ const audienceOptions = [
 ];
 
 export function EventRegistrationForm() {
+  const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [audienceSegment, setAudienceSegment] = useState("");
@@ -69,6 +71,7 @@ export function EventRegistrationForm() {
       }
 
       setRegistered(true);
+      router.push("/event/confirmed");
     } catch (err) {
       setError(
         err instanceof Error
@@ -114,6 +117,14 @@ export function EventRegistrationForm() {
         <h2 className="mt-3 font-serif text-3xl leading-tight">
           Save your seat
         </h2>
+        <div className="mt-4 rounded-md border border-crimson/15 bg-crimson/5 px-4 py-3">
+          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-crimson">
+            {AIOC_WEBINAR_EVENT.dateLabel}
+          </p>
+          <p className="mt-1 text-base font-semibold text-ink">
+            {AIOC_WEBINAR_EVENT.timeLabel}
+          </p>
+        </div>
         <p className="mt-2 text-sm leading-6 text-[#4B5563]">
           Use the email where you want the access link. The qualifier helps us
           keep the room useful.
