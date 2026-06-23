@@ -25,7 +25,7 @@ export function CommunityFooter() {
             </div>
           </div>
 
-          <nav className="flex items-center gap-5 text-xs font-mono uppercase tracking-wider text-[#737373]">
+          <nav className="flex max-w-full flex-wrap items-center justify-center gap-x-5 gap-y-3 text-center text-xs font-mono uppercase tracking-wider text-[#737373]">
             <Link href="/#program" className="hover:text-[#1A1A1A] transition-colors">
               Program
             </Link>
