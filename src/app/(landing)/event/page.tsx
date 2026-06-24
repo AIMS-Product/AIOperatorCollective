@@ -148,7 +148,7 @@ export default function EventPage() {
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.24em] text-crimson">
               {AIOC_WEBINAR_EVENT.eyebrow}
             </p>
-            <h1 className="mt-5 max-w-5xl font-serif text-[clamp(3rem,5.8vw,5.9rem)] leading-[0.96] text-ink">
+            <h1 className="mt-5 max-w-5xl font-serif text-[clamp(2.6rem,4.1vw,4.4rem)] leading-[1.03] text-ink">
               A business path for people who are already good at figuring out
               technology.
             </h1>
