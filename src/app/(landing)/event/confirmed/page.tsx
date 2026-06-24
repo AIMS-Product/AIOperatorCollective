@@ -68,6 +68,12 @@ const nextSteps = [
   "Listen for the opportunity: waste, ROI, scope, and trust.",
 ];
 
+const callFocusItems = [
+  "What got hard to see",
+  "What depended on memory",
+  "What had to earn trust",
+];
+
 export const metadata: Metadata = {
   title: `You're registered | ${AIOC_WEBINAR_EVENT.title}`,
   description:
@@ -119,6 +125,25 @@ export default function EventConfirmedPage() {
               >
                 What to listen for
               </a>
+            </div>
+
+            <div className="mt-10 max-w-3xl border-y border-line py-5">
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-crimson">
+                On the call, watch for
+              </p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                {callFocusItems.map((item) => (
+                  <div key={item} className="flex items-start gap-3">
+                    <CheckCircle2
+                      className="mt-0.5 h-4 w-4 shrink-0 text-crimson"
+                      aria-hidden
+                    />
+                    <p className="text-sm font-medium leading-6 text-[#3B414A]">
+                      {item}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
