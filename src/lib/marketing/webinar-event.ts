@@ -10,7 +10,7 @@ export const AIOC_WEBINAR_EVENT = {
   registrationSource: "event-page",
   registrationPath: "/event",
   confirmationPath: "/event/confirmed",
-  calendarPath: "/event/calendar",
+  calendarAnchor: "calendar",
   calendarDownloadPath: "/api/community/event/calendar",
   applicationPath: "/apply",
   description:
@@ -39,7 +39,7 @@ export function webinarConfirmationUrl() {
 }
 
 export function webinarCalendarUrl() {
-  return appUrl(AIOC_WEBINAR_EVENT.calendarPath);
+  return `${webinarConfirmationUrl()}#${AIOC_WEBINAR_EVENT.calendarAnchor}`;
 }
 
 export function webinarCalendarDownloadUrl() {
