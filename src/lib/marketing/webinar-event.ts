@@ -6,6 +6,7 @@ export const AIOC_WEBINAR_EVENT = {
   timeLabel: "11am PST / 2pm EST",
   locationLabel: "Live online",
   registrationSource: "event-page",
+  confirmationPath: "/event/confirmed",
   description:
     "Jess Mayo and Mike Hoffmann unpack what useful AI adoption really looks like inside SMB operations and why AIOC Cohort 1 is built for future AI Operators.",
 } as const;

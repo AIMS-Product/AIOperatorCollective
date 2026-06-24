@@ -71,7 +71,7 @@ export function EventRegistrationForm() {
       }
 
       setRegistered(true);
-      router.push("/event/confirmed");
+      router.push(AIOC_WEBINAR_EVENT.confirmationPath);
     } catch (err) {
       setError(
         err instanceof Error
