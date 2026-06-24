@@ -28,18 +28,24 @@ const details = [
   },
   {
     icon: Sparkles,
-    label: "Next step",
-    title: "Cohort 1 invitation",
-    body: "If the session confirms the fit, apply for the July cohort after the webinar.",
+    label: "Why attend",
+    title: "Test the path",
+    body: "Use the live examples to decide whether this kind of AI consulting work fits the way you think.",
   },
 ];
 
 const outcomes = [
-  "How SMB leaders actually experience AI once the hype meets real operations.",
-  "The difference between tool-first AI and Problem-First AI.",
-  "What AIMS looked for before building anything for Mike.",
-  "The bottlenecks that create real AI opportunities inside small businesses.",
-  "Why AIOC Cohort 1 is limited to 10 accepted people and who should apply.",
+  "You are usually the person who figures out the spreadsheet, tool, system, or weird tech problem before everyone else.",
+  "You pick up new software faster than most people around you.",
+  "You can look at a messy process and start seeing the steps, gaps, and shortcuts.",
+  "You are curious enough about AI to know it matters, even if you have not turned that curiosity into a serious business path yet.",
+];
+
+const diagnosisPoints = [
+  "Why companies are already rethinking work, headcount, and leverage as AI moves into the workplace.",
+  "Why a business owner may ask for more leads when the better first problem is the leak after the lead comes in.",
+  "How an operator looks for the business problem underneath the first request before recommending a tool.",
+  "Why the opportunity is not to sell AI, but to solve a problem a business can actually see and value.",
 ];
 
 const speakers = [
@@ -53,62 +59,61 @@ const speakers = [
   {
     icon: Mic2,
     name: "Mike Hoffmann",
-    role: "CEO and AIMS client",
-    body: "Mike brings the buyer and operator view: what SMB leaders actually care about, what feels risky, and what makes AI help credible instead of theoretical.",
+    role: "Multi-company CEO/operator, AIMS client, investor, and AIOC launch partner",
+    body: "AIMS has worked inside Mike's businesses, including Vendingpreneurs, Modern Amenities, VendHub, and others, to install AI systems and solve real operating problems. He brings the operator side of the table: what feels useful, what feels risky, and what makes a solution worth changing the business around.",
     initials: "MH",
   },
 ];
 
 const agenda = [
   {
-    title: "Getting started",
-    time: "0-3 min",
-    body: "This is not an AI tool demo. It is a real conversation about what AI looks like inside SMB operations. AI is gasoline. The business problem is the fire.",
+    title: "Why this path, why now",
+    time: "0-5 min",
+    body: "We will start with the real reason this matters: more people want control and options, while AI is changing what companies value at work.",
   },
   {
-    title: "Mike's before state",
-    time: "3-10 min",
-    body: "Mike shares what felt promising, confusing, or risky from the CEO seat, where the business actually had friction, and why generic AI solutions were not enough.",
+    title: "Mike and AIMS",
+    time: "5-12 min",
+    body: "Mike brings the CEO/operator lens from businesses where AIMS has installed AI systems and solved real operating problems.",
   },
   {
-    title: "What AIMS diagnosed first",
-    time: "10-20 min",
-    body: "Jess shows how an operator looks for repeated tasks, handoff gaps, slow follow-up, decision bottlenecks, and work that depends too much on one person.",
+    title: "Symptoms versus diagnosis",
+    time: "12-22 min",
+    body: "We will unpack why a business may ask for more leads, more automation, or some AI, when the higher-value first fix is hiding underneath the request.",
   },
   {
-    title: "What changed for Mike",
-    time: "20-30 min",
-    body: "A grounded look at what became clearer, faster, easier, or more visible, without over-sharing private implementation details.",
+    title: "The operator lens",
+    time: "22-34 min",
+    body: "You will see what someone has to learn before they can confidently diagnose, scope, and explain AI-enabled work in business terms.",
   },
   {
-    title: "The SMB opportunity",
-    time: "30-37 min",
-    body: "Why small businesses do not need AI theater, why judgment is becoming more valuable, and why AIOC is built for people who want to become credible AI Operators.",
+    title: "The AIOC path",
+    time: "34-42 min",
+    body: "We will show where AI Operators Collective fits: the apprenticeship-style community where AIMS and operator partners teach this work.",
   },
   {
-    title: "AIOC Cohort 1",
-    time: "37-43 min",
-    body: "Who Cohort 1 is for, why we are accepting 10 people, what they will practice, what happens after applying, and what AIOC does not guarantee.",
-  },
-  {
-    title: "Close and action",
-    time: "43-45 min",
-    body: "Apply if this made the path feel right. We will review applications and use the fit call to make sure the room is right.",
+    title: "How to decide",
+    time: "42-45 min",
+    body: "If the path feels real after the examples, we will explain what happens next and how to apply for Cohort 1.",
   },
 ];
 
 const faqs = [
   {
     q: "Is this a technical webinar?",
-    a: "No. We will talk about real business problems first and AI second. You do not need to be an engineer, but you should be the kind of person who is already tinkering, testing, or trying to make AI useful in real work.",
+    a: "No. We will talk about real business problems first and AI second. You do not need to be an engineer, but you should be comfortable figuring out technology and curious enough to learn where AI fits.",
   },
   {
-    q: "Is this for business owners or people who want to serve business owners?",
-    a: "Both can learn from it, but the AIOC Cohort 1 invitation is mainly for latent builders: people who want to become credible AI Operators by learning how to spot and solve real business problems.",
+    q: "Do I need to be an AI expert?",
+    a: "No. This is for people who are good at figuring out technology, not people who already have every AI tool mastered. The session is about whether this path fits the way you think.",
   },
   {
     q: "Will this guarantee clients or income?",
     a: "No. AIOC does not guarantee clients, income, placement, W2 replacement, or AIMS work. The goal is to build judgment, practice, proof, and a stronger ability to solve real problems.",
+  },
+  {
+    q: "Is this about starting an AI agency?",
+    a: "Not in the guru sense. It is about learning AI consulting work through real business problems: diagnosis, scoping, systems, and value a business can understand.",
   },
   {
     q: "Why only 10 accepted?",
@@ -144,12 +149,14 @@ export default function EventPage() {
               {AIOC_WEBINAR_EVENT.eyebrow}
             </p>
             <h1 className="mt-5 max-w-5xl font-serif text-[clamp(3rem,5.8vw,5.9rem)] leading-[0.96] text-ink">
-              Your AI judgment can solve real business problems.
+              A business path for people who are already good at figuring out
+              technology.
             </h1>
             <p className="mt-7 max-w-3xl text-lg leading-8 text-[#4B5563] sm:text-xl">
-              If you already tinker with AI, this conversation shows what makes
-              that ability useful to a real business: spotting the bottleneck,
-              asking better questions, and knowing what is worth building.
+              If you were looking for more control, flexibility, and a business
+              you can build around your own abilities, this live session will
+              help you test a different path: learning how to solve real
+              business problems with AI.
             </p>
 
             <div className="mt-9 flex">
@@ -179,8 +186,8 @@ export default function EventPage() {
                     Live with Jess and Mike
                   </p>
                   <p className="mt-2 text-sm leading-6 text-[#4B5563]">
-                    A buyer/operator view on where your AI instincts become
-                    credible inside real SMB work.
+                    A live operator view on how technology skill becomes useful
+                    inside real business problems.
                   </p>
                 </div>
               </div>
@@ -218,15 +225,15 @@ export default function EventPage() {
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.82fr_1.18fr]">
           <div>
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-crimson">
-              What this is
+              Path fit
             </p>
             <h2 className="mt-4 max-w-xl font-serif text-4xl leading-tight text-ink sm:text-5xl">
-              A practical conversation about buyer trust, not tool fluency.
+              This may fit the way your brain already works.
             </h2>
             <p className="mt-6 max-w-lg text-base leading-7 text-[#4B5563]">
-              Most AI conversations start with tools. Real businesses do not.
-              They start with bottlenecks, handoffs, time, trust, and risk. That
-              is where useful AI work begins.
+              This session is for the person who is not afraid of technology,
+              picks up new tools faster than most people around them, and wants
+              to know whether that ability can become a serious business path.
             </p>
           </div>
 
@@ -252,21 +259,65 @@ export default function EventPage() {
         </div>
       </section>
 
+      <section className="border-y border-line bg-[#F7F7F5] px-5 py-24 sm:px-6 sm:py-32 lg:px-8">
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.82fr_1.18fr]">
+          <div>
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-crimson">
+              Why now
+            </p>
+            <h2 className="mt-4 max-w-xl font-serif text-4xl leading-tight text-ink sm:text-5xl">
+              AI is changing work whether people are ready or not.
+            </h2>
+            <p className="mt-6 max-w-lg text-base leading-7 text-[#4B5563]">
+              The job market is not getting more forgiving. Companies are
+              already rethinking headcount, leverage, and what kind of work is
+              worth paying for.
+            </p>
+            <p className="mt-4 max-w-lg text-base leading-7 text-[#4B5563]">
+              The smart move is not to panic. It is to become the kind of person
+              who can use technology to create value a business can actually
+              see.
+            </p>
+          </div>
+
+          <div className="grid grid-flow-dense grid-cols-1 gap-3 sm:grid-cols-2">
+            {diagnosisPoints.map((item, index) => (
+              <div
+                key={item}
+                className={[
+                  "group rounded-md border border-line bg-white p-6 transition-all duration-300 hover:border-crimson/30 hover:shadow-[0_18px_50px_-36px_rgba(26,26,26,0.65)]",
+                  index === 0 ? "sm:col-span-2" : "",
+                  index === diagnosisPoints.length - 1 ? "sm:col-span-2" : "",
+                ].join(" ")}
+              >
+                <CheckCircle2
+                  className="h-5 w-5 text-crimson transition-transform duration-300 group-hover:scale-110"
+                  aria-hidden
+                />
+                <p className="mt-4 text-base leading-7 text-[#3B414A]">
+                  {item}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="bg-ink px-5 py-24 text-white sm:px-6 sm:py-32 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div>
               <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-crimson-light">
-                The conversation
+                Proof from the room
               </p>
               <h2 className="mt-4 max-w-3xl font-serif text-4xl leading-tight sm:text-5xl">
-                Buyer perspective meets operator judgment.
+                AIMS already does this work inside operator-led companies.
               </h2>
             </div>
             <p className="max-w-xl text-base leading-7 text-white/68 lg:justify-self-end">
-              The point is not to make AI sound impressive. It is to understand
-              what a business leader needs to trust, fund, and adopt a better
-              system.
+              Jess brings the AI and systems side. Mike brings the CEO side.
+              Together, they will show why useful AI consulting starts with the
+              business problem, not the tool demo.
             </p>
           </div>
 
@@ -312,15 +363,16 @@ export default function EventPage() {
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.78fr_1.22fr]">
           <div className="lg:sticky lg:top-28 lg:self-start">
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-crimson">
-              Run of show
+              What we will cover live
             </p>
             <h2 className="mt-4 font-serif text-4xl leading-tight text-ink sm:text-5xl">
-              Forty-five minutes on how useful AI work actually gets found.
+              Business owners bring symptoms. Operators learn to find the
+              diagnosis.
             </h2>
             <p className="mt-6 text-base leading-7 text-[#4B5563]">
-              We will keep it tight: Mike&apos;s before state, what AIMS
-              diagnosed first, what changed at a category level, and how Cohort
-              1 works if the path feels right.
+              We will keep it tight: real examples, the operator lens, what
+              AIMS had to understand before recommending anything, and what this
+              means if you want to learn AI consulting work.
             </p>
           </div>
 
@@ -390,18 +442,19 @@ export default function EventPage() {
       <section className="px-5 pb-24 sm:px-6 sm:pb-32 lg:px-8">
         <div className="mx-auto max-w-6xl rounded-md bg-crimson px-6 py-12 text-center text-white sm:px-10 sm:py-16">
           <h2 className="mx-auto max-w-4xl font-serif text-4xl leading-tight sm:text-5xl">
-            If this makes the path feel right, apply for Cohort 1 next.
+            If this feels like it might be your lane, start with the live
+            session.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/78">
-            We are accepting 10 people for July and using the application plus
-            fit call to make sure the room is right. No guarantees, no magic, no
-            passive-income story.
+            Save your seat now. If the examples make the path feel real, we will
+            explain AIOC Cohort 1 and the application process during the
+            webinar.
           </p>
           <Link
             href="#register"
             className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-md bg-white px-6 text-sm font-bold uppercase tracking-wider text-crimson transition-colors hover:bg-[#F5F5F5]"
           >
-            Register for the webinar
+            Save my seat
             <ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
         </div>

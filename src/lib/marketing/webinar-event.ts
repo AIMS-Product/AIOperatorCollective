@@ -1,12 +1,12 @@
 export const AIOC_WEBINAR_EVENT = {
   slug: "aioc-webinar-2026-06-30",
   title: "AI In The Workplace: What Small Businesses Actually Need",
-  eyebrow: "Live AIOC case-study conversation",
+  eyebrow: "Live conversation with Jess Mayo and Mike Hoffmann",
   dateLabel: "Tuesday, June 30, 2026",
-  timeLabel: "11am PST / 2pm EST",
+  timeLabel: "11am PT / 2pm ET",
   locationLabel: "Live online",
   registrationSource: "event-page",
   confirmationPath: "/event/confirmed",
   description:
-    "Jess Mayo and Mike Hoffmann unpack what useful AI adoption really looks like inside SMB operations and why AIOC Cohort 1 is built for future AI Operators.",
+    "A live conversation for people who are good at figuring out technology and want to test a business path around solving real problems with AI.",
 } as const;

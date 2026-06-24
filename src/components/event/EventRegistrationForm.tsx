@@ -7,10 +7,13 @@ import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import { AIOC_WEBINAR_EVENT } from "@/lib/marketing/webinar-event";
 
 const audienceOptions = [
-  { value: "technical-ish-professional", label: "Technical-ish professional" },
-  { value: "operator-generalist", label: "Operator / generalist" },
-  { value: "business-owner", label: "Business owner" },
-  { value: "marketer-sales", label: "Marketing / sales" },
+  {
+    value: "technical-ish-professional",
+    label: "I'm good at figuring out technology",
+  },
+  { value: "operator-generalist", label: "I work around ops, data, or systems" },
+  { value: "business-owner", label: "I run or help run a business" },
+  { value: "marketer-sales", label: "I work in marketing or sales" },
   { value: "other", label: "Other" },
 ];
 
@@ -127,7 +130,7 @@ export function EventRegistrationForm() {
         </div>
         <p className="mt-2 text-sm leading-6 text-[#4B5563]">
           Use the email where you want the access link. The qualifier helps us
-          keep the room useful.
+          understand who is in the room.
         </p>
       </div>
 
@@ -218,7 +221,7 @@ export function EventRegistrationForm() {
 
       <p className="mt-4 text-xs leading-5 text-[#737373]">
         No payment to register. We&apos;ll use this email for webinar details
-        and relevant AIOC follow-up.
+        and relevant follow-up after the session.
       </p>
     </form>
   );
