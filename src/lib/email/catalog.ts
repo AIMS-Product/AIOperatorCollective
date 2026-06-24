@@ -145,6 +145,90 @@ export const EMAIL_TEMPLATES: TemplateCatalogEntry[] = [
     },
   },
 
+  // ─── AIOC webinar funnel ────────────────────────────────────────────
+  {
+    templateKey: "aoc.webinar-registration-confirmation",
+    displayName: "AOC Webinar: Registration Confirmation",
+    description:
+      "Fires after webinar registration. Calendar-first confirmation with Demio join-link expectation and listening frame.",
+    phase: "foundation",
+    sample: (to) => ({ to, name: "Adam Wolfe" }),
+    send: async (args) => {
+      const { sendWebinarRegistrationConfirmationEmail } = await import(
+        "./webinar-event"
+      )
+      return sendWebinarRegistrationConfirmationEmail(
+        args as { to: string; name: string },
+      )
+    },
+  },
+  {
+    templateKey: "aoc.webinar-reminder.day-before",
+    displayName: "AOC Webinar: Reminder — Day Before",
+    description:
+      "Pre-webinar reminder. Sells live attendance by reframing the operator lens, not the program.",
+    phase: "foundation",
+    sample: (to) => ({ to, name: "Adam Wolfe", timing: "day-before" }),
+    send: async (args) => {
+      const { sendWebinarReminderEmail } = await import("./webinar-event")
+      return sendWebinarReminderEmail(
+        args as { to: string; name: string; timing: "day-before" },
+      )
+    },
+  },
+  {
+    templateKey: "aoc.webinar-reminder.morning-of",
+    displayName: "AOC Webinar: Reminder — Morning Of",
+    description:
+      "Day-of reminder. Points to Demio join link and the first request -> diagnosis -> first useful fix frame.",
+    phase: "foundation",
+    sample: (to) => ({ to, name: "Adam Wolfe", timing: "morning-of" }),
+    send: async (args) => {
+      const { sendWebinarReminderEmail } = await import("./webinar-event")
+      return sendWebinarReminderEmail(
+        args as { to: string; name: string; timing: "morning-of" },
+      )
+    },
+  },
+  {
+    templateKey: "aoc.webinar-follow-up.attended",
+    displayName: "AOC Webinar: Follow-Up — Attended",
+    description:
+      "Post-webinar follow-up for attendees. Moves from path belief into application interest without income claims.",
+    phase: "foundation",
+    sample: (to) => ({ to, name: "Adam Wolfe", type: "attended" }),
+    send: async (args) => {
+      const { sendWebinarFollowUpEmail } = await import("./webinar-event")
+      return sendWebinarFollowUpEmail(
+        args as { to: string; name: string; type: "attended" },
+      )
+    },
+  },
+  {
+    templateKey: "aoc.webinar-follow-up.missed",
+    displayName: "AOC Webinar: Follow-Up — Missed",
+    description:
+      "Post-webinar follow-up for no-shows. Gives the core frame and a soft next step.",
+    phase: "foundation",
+    sample: (to) => ({
+      to,
+      name: "Adam Wolfe",
+      type: "missed",
+      replayUrl: "https://www.aioperatorcollective.com/event/confirmed",
+    }),
+    send: async (args) => {
+      const { sendWebinarFollowUpEmail } = await import("./webinar-event")
+      return sendWebinarFollowUpEmail(
+        args as {
+          to: string
+          name: string
+          type: "missed"
+          replayUrl?: string | null
+        },
+      )
+    },
+  },
+
   // ─── AOC apply funnel ────────────────────────────────────────────────
   {
     templateKey: "aoc.application-received",

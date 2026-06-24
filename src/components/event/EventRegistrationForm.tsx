@@ -63,6 +63,7 @@ export function EventRegistrationForm() {
           utmSource: params.get("utm_source") ?? undefined,
           utmMedium: params.get("utm_medium") ?? undefined,
           utmCampaign: params.get("utm_campaign") ?? undefined,
+          refUrl: window.location.href,
         }),
       });
 

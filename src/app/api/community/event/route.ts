@@ -1,7 +1,13 @@
 import { NextResponse } from "next/server"
 import { z } from "zod"
 import { createCloseLead } from "@/lib/close"
+import {
+  DemioConfigError,
+  DemioRegistrationError,
+  registerDemioAttendee,
+} from "@/lib/demio"
 import { db } from "@/lib/db"
+import { sendWebinarRegistrationConfirmationEmail } from "@/lib/email/webinar-event"
 import { logger } from "@/lib/logger"
 import { AIOC_WEBINAR_EVENT } from "@/lib/marketing/webinar-event"
 import { notify } from "@/lib/notifications"
@@ -23,6 +29,7 @@ const schema = z.object({
   utmSource: z.string().max(60).optional(),
   utmMedium: z.string().max(60).optional(),
   utmCampaign: z.string().max(60).optional(),
+  refUrl: z.string().url().max(500).optional(),
 })
 
 export async function POST(req: Request) {
@@ -42,7 +49,15 @@ export async function POST(req: Request) {
       )
     }
 
-    const { email, name, audienceSegment, utmSource, utmMedium, utmCampaign } = parsed.data
+    const {
+      email,
+      name,
+      audienceSegment,
+      utmSource,
+      utmMedium,
+      utmCampaign,
+      refUrl,
+    } = parsed.data
     const contactName = name?.trim() || email.split("@")[0]
     const source = `event:${AIOC_WEBINAR_EVENT.slug}`
 
@@ -62,6 +77,33 @@ export async function POST(req: Request) {
         { ok: true, duplicate: true, event: AIOC_WEBINAR_EVENT.slug },
         { status: 200 }
       )
+    }
+
+    let demioJoinLink: string | null = null
+    try {
+      const demioRegistration = await registerDemioAttendee({
+        name: contactName,
+        email,
+        refUrl,
+      })
+      demioJoinLink = demioRegistration.joinLink
+    } catch (err) {
+      logger.error("Failed to register webinar attendee in Demio", err, {
+        email,
+        eventSlug: AIOC_WEBINAR_EVENT.slug,
+      })
+
+      if (err instanceof DemioConfigError || err instanceof DemioRegistrationError) {
+        return NextResponse.json(
+          {
+            error:
+              "We could not complete the webinar registration. Please try again.",
+          },
+          { status: 502 },
+        )
+      }
+
+      throw err
     }
 
     const deal = await db.deal
@@ -92,6 +134,7 @@ export async function POST(req: Request) {
                 utmSource: utmSource ?? null,
                 utmMedium: utmMedium ?? null,
                 utmCampaign: utmCampaign ?? null,
+                demioJoinLink: demioJoinLink ?? null,
               },
             },
           },
@@ -125,6 +168,16 @@ export async function POST(req: Request) {
         })
         .catch((err) => logger.error("Failed to sync webinar lead to Close", err))
     }
+
+    sendWebinarRegistrationConfirmationEmail({
+      to: email,
+      name: contactName,
+    }).catch((err) =>
+      logger.error("Failed to send webinar confirmation email", err, {
+        email,
+        eventSlug: AIOC_WEBINAR_EVENT.slug,
+      }),
+    )
 
     return NextResponse.json(
       { ok: true, event: AIOC_WEBINAR_EVENT.slug },

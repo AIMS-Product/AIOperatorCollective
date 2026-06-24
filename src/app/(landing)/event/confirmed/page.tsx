@@ -9,6 +9,7 @@ import {
   Mail,
   Radio,
 } from "lucide-react";
+import { WebinarCalendarButtons } from "@/components/event/WebinarCalendarButtons";
 import { AIOC_WEBINAR_EVENT } from "@/lib/marketing/webinar-event";
 
 const eventDetails = [
@@ -16,62 +17,60 @@ const eventDetails = [
     icon: CalendarDays,
     label: "Date",
     title: AIOC_WEBINAR_EVENT.dateLabel,
-    body: "Block the date now. We will send the access link by email.",
+    body: "Put it on your calendar now. Demio will send your unique access link separately.",
   },
   {
     icon: Clock3,
     label: "Time",
     title: AIOC_WEBINAR_EVENT.timeLabel,
-    body: "Join live at the scheduled time. Replay details will go to registrants.",
+    body: "Join live if you can. The examples will make more sense in order.",
   },
   {
     icon: Radio,
     label: "Format",
     title: AIOC_WEBINAR_EVENT.locationLabel,
-    body: "Live Jess + Mike conversation, with replay details sent to registrants.",
+    body: "Live Jess + Mike conversation. Replay details will go to registrants.",
   },
 ];
 
 const ceoProblemExamples = [
-  "The business keeps moving because the owner keeps remembering what everyone else forgot.",
-  "A decision gets made in the room, then dies slowly across tools, threads, and memory.",
-  "Everyone is busy, but nobody can tell which work is actually moving the company forward.",
-  "One person knows how the process really works. If they leave, the company loses the map.",
-  "The customer gets a different answer depending on who picks up the thread.",
-  "Another hire starts to look necessary because the process has no more slack.",
+  "They ask for more leads, but the first useful fix may be the leak after a lead raises their hand.",
+  "They ask for automation, but the real issue may be follow-up, ownership, or trust in the process.",
+  "They ask for AI, but often cannot name which business problem should be solved first.",
+  "The operator's job is not to sell a stack of tools. It is to find the problem a business can see, value, and say yes to.",
 ];
 
 const mikeContextPoints = [
   {
-    title: "Mike is not evaluating this from the sidelines.",
-    body: "He knows what it feels like when a tool creates more decisions, not fewer. The conversation starts with owner questions: where is the business capped, who has to trust the fix, and what changes if it works?",
+    title: "Mike brings the CEO/operator side of the table.",
+    body: "He is a multi-company CEO/operator, AIMS client, AIMS investor, and AIOC launch partner. He knows what feels useful, what feels risky, and what makes a fix worth changing the business around.",
   },
   {
-    title: "The business had to be understood first.",
-    body: "We will talk about what AIMS had to see before recommending anything: where memory, follow-through, capacity, or trust was breaking down, and what would have been noise.",
+    title: "AIMS has worked inside his businesses.",
+    body: "AIMS has installed AI systems and solved operating problems inside Mike-led companies including Vendingpreneurs, Modern Amenities, VendHub, and others.",
   },
   {
-    title: "The lesson is not Mike's exact playbook.",
-    body: "The point is to hear how a vague AI conversation becomes a business constraint clear enough to solve.",
+    title: "The lesson is the lens.",
+    body: "The point is not to copy Mike's exact playbook. It is to hear how a vague business request becomes a problem clear enough to diagnose, scope, and explain.",
   },
 ];
 
 const listenForPrompts = [
-  "What is the business wasting: time, money, attention, or capacity?",
-  "What would make the ROI clear enough for an owner to trust?",
-  "What scope creates a win for the owner and a sane project for the operator?",
+  "What did the business ask for first?",
+  "What had to be diagnosed before AI made sense?",
+  "What would make the first fix worth trusting?",
 ];
 
 const nextSteps = [
-  "Watch for the confirmation email.",
-  "Add the date to your calendar.",
-  "Listen for the opportunity: waste, ROI, scope, and trust.",
+  "Add the session to your calendar.",
+  "Watch for the Demio email with your unique join link.",
+  "Show up live and listen for the request -> diagnosis -> first useful fix pattern.",
 ];
 
 const callFocusItems = [
-  "What got hard to see",
-  "What depended on memory",
-  "What had to earn trust",
+  "The first request",
+  "The real diagnosis",
+  "The first useful fix",
 ];
 
 export const metadata: Metadata = {
@@ -90,25 +89,28 @@ export default function EventConfirmedPage() {
       <section className="relative overflow-hidden border-b border-line bg-[#F7F7F5]">
         <div className="absolute inset-x-0 top-0 h-px bg-crimson/30" />
         <div className="absolute right-[-18rem] top-[-18rem] h-[34rem] w-[34rem] rounded-full bg-crimson/10 blur-3xl" />
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 sm:py-20 lg:grid-cols-[minmax(0,1fr)_420px] lg:px-8 lg:py-24">
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 sm:py-20 lg:grid-cols-[minmax(0,1fr)_430px] lg:px-8 lg:py-24">
           <div className="relative z-10 max-w-4xl animate-fade-up">
             <div className="inline-flex items-center gap-2 border-l-2 border-crimson bg-white px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-crimson shadow-[0_16px_50px_-44px_rgba(26,26,26,0.7)]">
               <CheckCircle2 className="h-4 w-4" aria-hidden />
               Registered
             </div>
-            <h1 className="mt-6 max-w-4xl font-serif text-[clamp(3.2rem,6vw,6.3rem)] leading-[0.94] text-ink">
-              You&apos;re in.
+            <h1 className="mt-6 max-w-4xl font-serif text-[clamp(2.8rem,5vw,5.2rem)] leading-[0.98] text-ink">
+              You&apos;re registered.
             </h1>
             <p className="mt-7 max-w-3xl text-lg leading-8 text-[#4B5563] sm:text-xl">
-              We will send the join link and reminders to your inbox. On the
-              call, Jess and Mike will walk through what AIMS did inside
-              Mike&apos;s business: what was getting hard to see, what depended
-              too much on memory, and why the CEO lens changes the whole AI
-              conversation.
+              You&apos;re set for{" "}
+              <strong className="font-semibold text-ink">
+                {AIOC_WEBINAR_EVENT.title}
+              </strong>{" "}
+              on {AIOC_WEBINAR_EVENT.dateLabel} at{" "}
+              {AIOC_WEBINAR_EVENT.timeLabel}. Demio will email your unique join
+              link and reminders.
             </p>
             <p className="mt-5 max-w-2xl text-base leading-7 text-[#5F6671]">
-              The point is not the tool stack. It is what had to become clear
-              before AI was worth trusting.
+              Add it to the calendar you actually use, then show up live to test
+              whether this business path fits the way you already think through
+              technology.
             </p>
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -116,7 +118,7 @@ export default function EventConfirmedPage() {
                 href="#calendar"
                 className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-crimson px-6 text-sm font-bold uppercase tracking-wider text-white shadow-[0_12px_32px_-18px_rgba(152,27,27,0.9)] transition-colors hover:bg-crimson-dark"
               >
-                Calendar details
+                Add to calendar
                 <ArrowRight className="h-4 w-4" aria-hidden />
               </a>
               <a
@@ -163,28 +165,26 @@ export default function EventConfirmedPage() {
                   Case-study conversation
                 </p>
                 <h2 className="mt-3 font-serif text-3xl leading-tight text-white">
-                  Mike Hoffmann brings the CEO lens.
+                  Mike Hoffmann brings the CEO/operator lens.
                 </h2>
                 <p className="mt-4 text-sm leading-6 text-white/70">
-                  He has built across vending, Vendingpreneur, and other
-                  operator-led businesses. That means we can talk about AI from
-                  the side that actually has to decide whether a solution is
-                  worth changing behavior around.
+                  AIMS has worked inside Mike&apos;s businesses, including
+                  Vendingpreneurs, Modern Amenities, VendHub, and others. That
+                  lets us talk about AI from the side that has to decide whether
+                  a solution is worth changing behavior around.
                 </p>
               </div>
               <div className="grid grid-flow-dense grid-cols-1 divide-y divide-line sm:grid-cols-3 sm:divide-x sm:divide-y-0 lg:grid-cols-1 lg:divide-x-0 lg:divide-y">
-                {mikeContextPoints.map((point) => {
-                  return (
-                    <div key={point.title} className="p-5">
-                      <h3 className="text-base font-semibold leading-6 text-ink">
-                        {point.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-6 text-[#5F6671]">
-                        {point.body}
-                      </p>
-                    </div>
-                  );
-                })}
+                {mikeContextPoints.map((point) => (
+                  <div key={point.title} className="p-5">
+                    <h3 className="text-base font-semibold leading-6 text-ink">
+                      {point.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-6 text-[#5F6671]">
+                      {point.body}
+                    </p>
+                  </div>
+                ))}
               </div>
               <div className="border-t border-line p-6">
                 <div className="flex items-start gap-3">
@@ -194,8 +194,8 @@ export default function EventConfirmedPage() {
                       Check your inbox.
                     </h3>
                     <p className="mt-2 text-sm leading-6 text-[#4B5563]">
-                      The confirmation email carries the event logistics and
-                      reminder details.
+                      You&apos;ll get an AIOC confirmation email for the
+                      calendar options, and Demio will send your join link.
                     </p>
                   </div>
                 </div>
@@ -205,8 +205,26 @@ export default function EventConfirmedPage() {
 
           <div
             id="calendar"
-            className="relative z-10 grid scroll-mt-24 grid-flow-dense grid-cols-1 border-y border-line md:grid-cols-3 lg:col-span-2"
+            className="relative z-10 grid scroll-mt-24 grid-flow-dense grid-cols-1 border-y border-line lg:col-span-2 lg:grid-cols-[0.78fr_1.22fr]"
           >
+            <div className="border-b border-line py-6 lg:border-b-0 lg:border-r lg:pr-8">
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-crimson">
+                Add it now
+              </p>
+              <h2 className="mt-3 text-xl font-semibold text-ink">
+                Put the session on the calendar you actually use.
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-[#5F6671]">
+                Google and Outlook open directly. Apple/iCal downloads the
+                invite. Your unique join link still comes from Demio.
+              </p>
+            </div>
+            <div className="py-6 lg:pl-8">
+              <WebinarCalendarButtons />
+            </div>
+          </div>
+
+          <div className="relative z-10 grid grid-flow-dense grid-cols-1 border-b border-line md:grid-cols-3 lg:col-span-2">
             {eventDetails.map((item) => {
               const Icon = item.icon;
               return (
@@ -237,20 +255,19 @@ export default function EventConfirmedPage() {
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.82fr_1.18fr]">
           <div>
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-crimson">
-              What CEOs actually feel
+              Why live matters
             </p>
             <h2 className="mt-4 max-w-xl font-serif text-4xl leading-tight text-ink sm:text-5xl">
-              The business is running on memory, meetings, and heroic
-              follow-through.
+              Business owners usually bring the symptom, not the diagnosis.
             </h2>
             <p className="mt-6 max-w-lg text-base leading-7 text-[#4B5563]">
-              CEOs do not wake up worried about automations. They wake up
-              because the team is busy, the truth is still trapped in
-              people&apos;s heads, and every fix seems to require another
-              meeting, another tool, or another hire.
+              This is why the examples matter. A business may ask for more
+              leads, more automation, or some AI. The valuable work is figuring
+              out what is actually leaking time, revenue, trust, or capacity.
             </p>
             <p className="mt-4 max-w-lg text-base leading-7 text-[#4B5563]">
-              That is the layer AIMS looks for first.
+              You do not need to bring a problem for us to workshop live. Just
+              listen for the pattern.
             </p>
           </div>
 
@@ -284,17 +301,16 @@ export default function EventConfirmedPage() {
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.82fr_1.18fr]">
           <div>
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-crimson-light">
-              The CEO lens
+              The operator lens
             </p>
             <h2 className="mt-4 max-w-2xl font-serif text-4xl leading-tight sm:text-5xl">
-              Learn to see the business opportunity inside the waste.
+              Listen for the gap between the first request and the real problem.
             </h2>
             <p className="mt-6 max-w-xl text-base leading-7 text-white/68">
-              Most owners are not buying the technical explanation. They know
-              something is wasting time, money, or people, and they need a
-              solution they can trust. The opportunity is learning to identify
-              the real business problem, make the ROI visible, scope the fix,
-              and create a win on both sides.
+              Most owners are not buying a technical explanation. They need a
+              fix whose value is clear enough to trust. Watch how Jess and Mike
+              move from the first request to the diagnosis, then to the first
+              fix a business could understand.
             </p>
           </div>
 
@@ -304,9 +320,9 @@ export default function EventConfirmedPage() {
               What to listen for.
             </h3>
             <p className="mt-4 text-base leading-7 text-white/70">
-              As Mike talks through his business, listen for how the problem
-              turns into an opportunity: diagnose the waste, estimate the upside,
-              then shape a solution the owner can actually say yes to.
+              You are not expected to know how to run this process yet. That is
+              the point. Notice which parts require business judgment, not just
+              tool fluency.
             </p>
             <div className="mt-7 divide-y divide-white/12 rounded-md border border-white/12 bg-white/[0.05]">
               {listenForPrompts.map((prompt, index) => (
@@ -334,8 +350,7 @@ export default function EventConfirmedPage() {
               What happens next
             </p>
             <h2 className="mt-4 max-w-3xl font-serif text-4xl leading-tight text-ink sm:text-5xl">
-              Show up knowing what to listen for. Leave with a sharper operator
-              lens.
+              Add it once. Let the reminders do their job.
             </h2>
           </div>
 
@@ -360,21 +375,31 @@ export default function EventConfirmedPage() {
       <section className="px-5 pb-24 sm:px-6 sm:pb-32 lg:px-8">
         <div className="mx-auto max-w-6xl rounded-md bg-crimson px-6 py-12 text-center text-white sm:px-10 sm:py-16">
           <h2 className="mx-auto max-w-4xl font-serif text-4xl leading-tight sm:text-5xl">
-            If this is the kind of work you want to practice, apply for Cohort
-            1.
+            After the session, decide whether this is the work you want to
+            practice.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/78">
-            No payment to apply. We use the application and Fit Call to decide
-            together whether AIOC is the right room. No guaranteed clients,
-            income, placement, W2 replacement, or AIMS work.
+            If the examples make the path feel real, AIOC Cohort 1 is the
+            deeper next step: an apprenticeship-style room for practicing
+            diagnosis, scoping, business conversations, and useful AI-enabled
+            work. No payment to apply, and no guaranteed clients, income,
+            placement, W2 replacement, or AIMS work.
           </p>
-          <Link
-            href="/apply"
-            className="mt-8 inline-flex h-12 items-center justify-center gap-2 rounded-md bg-white px-6 text-sm font-bold uppercase tracking-wider text-crimson transition-colors hover:bg-[#F5F5F5]"
-          >
-            Apply for Cohort 1
-            <ArrowRight className="h-4 w-4" aria-hidden />
-          </Link>
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href="#calendar"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-white px-6 text-sm font-bold uppercase tracking-wider text-crimson transition-colors hover:bg-[#F5F5F5]"
+            >
+              Add to calendar
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </a>
+            <Link
+              href="/apply"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-white/28 px-6 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-white/10"
+            >
+              Apply after the session
+            </Link>
+          </div>
         </div>
       </section>
     </main>
