@@ -89,69 +89,121 @@ export default function EventConfirmedPage() {
       <section className="relative overflow-hidden border-b border-line bg-[#F7F7F5]">
         <div className="absolute inset-x-0 top-0 h-px bg-crimson/30" />
         <div className="absolute right-[-18rem] top-[-18rem] h-[34rem] w-[34rem] rounded-full bg-crimson/10 blur-3xl" />
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-6 sm:py-20 lg:grid-cols-[minmax(0,1fr)_430px] lg:px-8 lg:py-24">
-          <div className="relative z-10 max-w-4xl animate-fade-up">
-            <div className="inline-flex items-center gap-2 border-l-2 border-crimson bg-white px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-crimson shadow-[0_16px_50px_-44px_rgba(26,26,26,0.7)]">
-              <CheckCircle2 className="h-4 w-4" aria-hidden />
-              Registered
-            </div>
-            <h1 className="mt-6 max-w-4xl font-serif text-[clamp(2.8rem,5vw,5.2rem)] leading-[0.98] text-ink">
-              You&apos;re registered.
-            </h1>
-            <p className="mt-7 max-w-3xl text-lg leading-8 text-[#4B5563] sm:text-xl">
-              You&apos;re set for{" "}
-              <strong className="font-semibold text-ink">
-                {AIOC_WEBINAR_EVENT.title}
-              </strong>{" "}
-              on {AIOC_WEBINAR_EVENT.dateLabel} at{" "}
-              {AIOC_WEBINAR_EVENT.timeLabel}. Demio will email your unique join
-              link and reminders.
-            </p>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-[#5F6671]">
-              Add it to the calendar you actually use, then show up live to test
-              whether this business path fits the way you already think through
-              technology.
-            </p>
-
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <a
-                href="#calendar"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-crimson px-6 text-sm font-bold uppercase tracking-wider text-white shadow-[0_12px_32px_-18px_rgba(152,27,27,0.9)] transition-colors hover:bg-crimson-dark"
-              >
-                Add to calendar
-                <ArrowRight className="h-4 w-4" aria-hidden />
-              </a>
-              <a
-                href="#lens"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-line bg-white px-6 text-sm font-bold uppercase tracking-wider text-ink transition-colors hover:border-crimson/30 hover:text-crimson"
-              >
-                What to listen for
-              </a>
-            </div>
-
-            <div className="mt-10 max-w-3xl border-y border-line py-5">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-crimson">
-                On the call, watch for
+        <div className="mx-auto max-w-7xl px-5 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_390px] lg:items-start">
+            <div className="relative z-10 animate-fade-up">
+              <div className="inline-flex items-center gap-2 border-l-2 border-crimson bg-white px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-crimson shadow-[0_16px_50px_-44px_rgba(26,26,26,0.7)]">
+                <CheckCircle2 className="h-4 w-4" aria-hidden />
+                Registered
+              </div>
+              <h1 className="mt-6 max-w-4xl font-serif text-[clamp(2.8rem,5vw,5.2rem)] leading-[0.98] text-ink">
+                You&apos;re registered.
+              </h1>
+              <p className="mt-7 max-w-3xl text-lg leading-8 text-[#4B5563] sm:text-xl">
+                You&apos;re set for{" "}
+                <strong className="font-semibold text-ink">
+                  {AIOC_WEBINAR_EVENT.title}
+                </strong>{" "}
+                on {AIOC_WEBINAR_EVENT.dateLabel} at{" "}
+                {AIOC_WEBINAR_EVENT.timeLabel}. Demio will email your unique
+                join link and reminders.
               </p>
-              <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                {callFocusItems.map((item) => (
-                  <div key={item} className="flex items-start gap-3">
-                    <CheckCircle2
-                      className="mt-0.5 h-4 w-4 shrink-0 text-crimson"
-                      aria-hidden
-                    />
-                    <p className="text-sm font-medium leading-6 text-[#3B414A]">
-                      {item}
+              <p className="mt-5 max-w-2xl text-base leading-7 text-[#5F6671]">
+                Add it to the calendar you actually use, then show up live to
+                test whether this business path fits the way you already think
+                through technology.
+              </p>
+
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <a
+                  href="#calendar"
+                  className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-crimson px-6 text-sm font-bold uppercase tracking-wider text-white shadow-[0_12px_32px_-18px_rgba(152,27,27,0.9)] transition-colors hover:bg-crimson-dark"
+                >
+                  Add to calendar
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </a>
+                <a
+                  href="#lens"
+                  className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-line bg-white px-6 text-sm font-bold uppercase tracking-wider text-ink transition-colors hover:border-crimson/30 hover:text-crimson"
+                >
+                  What to listen for
+                </a>
+              </div>
+
+              <div
+                id="calendar"
+                className="mt-9 scroll-mt-24 border-y border-line py-6"
+              >
+                <div className="grid gap-6 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
+                  <div>
+                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-crimson">
+                      Add it now
+                    </p>
+                    <h2 className="mt-3 max-w-xl text-2xl font-semibold leading-tight text-ink">
+                      Put the session on the calendar you actually use.
+                    </h2>
+                    <p className="mt-3 max-w-md text-sm leading-6 text-[#5F6671]">
+                      Google and Outlook open directly. Apple/iCal downloads
+                      the invite. Your unique join link still comes from Demio.
                     </p>
                   </div>
-                ))}
+                  <WebinarCalendarButtons />
+                </div>
               </div>
             </div>
+
+            <aside className="relative z-10">
+              <div className="overflow-hidden rounded-md border border-line bg-white shadow-[0_26px_80px_-52px_rgba(26,26,26,0.72)]">
+                <div className="border-b border-line bg-ink p-5 text-white">
+                  <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-crimson-light">
+                    Event details
+                  </p>
+                  <h2 className="mt-3 font-serif text-3xl leading-tight text-white">
+                    Save the time. Watch for the lens.
+                  </h2>
+                </div>
+                <div className="divide-y divide-line">
+                  {eventDetails.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <div key={item.label} className="p-5">
+                        <div className="flex items-center gap-2 text-crimson">
+                          <Icon className="h-4 w-4" aria-hidden />
+                          <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em]">
+                            {item.label}
+                          </p>
+                        </div>
+                        <h3 className="mt-3 text-base font-semibold text-ink">
+                          {item.title}
+                        </h3>
+                        <p className="mt-2 text-sm leading-6 text-[#5F6671]">
+                          {item.body}
+                        </p>
+                      </div>
+                    );
+                  })}
+                  <div className="p-5">
+                    <div className="flex items-start gap-3">
+                      <Mail className="mt-1 h-5 w-5 shrink-0 text-crimson" />
+                      <div>
+                        <h3 className="text-base font-semibold text-ink">
+                          Check your inbox.
+                        </h3>
+                        <p className="mt-2 text-sm leading-6 text-[#4B5563]">
+                          You&apos;ll get an AIOC confirmation email for the
+                          calendar options, and Demio will send your join link.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </aside>
           </div>
 
-          <aside className="relative z-10 lg:pt-7">
-            <div className="overflow-hidden rounded-md border border-line bg-white shadow-[0_26px_80px_-52px_rgba(26,26,26,0.72)]">
-              <div className="bg-ink p-6 text-white">
+          <div className="relative z-10 mt-10 overflow-hidden rounded-md border border-line bg-white shadow-[0_22px_70px_-58px_rgba(26,26,26,0.65)]">
+            <div className="grid grid-flow-dense grid-cols-1 lg:grid-cols-[0.78fr_1.22fr]">
+              <div className="bg-ink p-6 text-white sm:p-8">
                 <div className="flex items-center gap-3">
                   <div className="flex h-12 w-12 items-center justify-center rounded-md border border-white/14 bg-white/[0.06] font-serif text-xl">
                     MH
@@ -164,89 +216,54 @@ export default function EventConfirmedPage() {
                 <p className="mt-7 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-crimson-light">
                   Case-study conversation
                 </p>
-                <h2 className="mt-3 font-serif text-3xl leading-tight text-white">
+                <h2 className="mt-3 max-w-lg font-serif text-4xl leading-tight text-white">
                   Mike Hoffmann brings the CEO/operator lens.
                 </h2>
-                <p className="mt-4 text-sm leading-6 text-white/70">
+                <p className="mt-5 max-w-xl text-sm leading-6 text-white/70">
                   AIMS has worked inside Mike&apos;s businesses, including
                   Vendingpreneurs, Modern Amenities, VendHub, and others. That
                   lets us talk about AI from the side that has to decide whether
                   a solution is worth changing behavior around.
                 </p>
               </div>
-              <div className="grid grid-flow-dense grid-cols-1 divide-y divide-line sm:grid-cols-3 sm:divide-x sm:divide-y-0 lg:grid-cols-1 lg:divide-x-0 lg:divide-y">
-                {mikeContextPoints.map((point) => (
-                  <div key={point.title} className="p-5">
-                    <h3 className="text-base font-semibold leading-6 text-ink">
-                      {point.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-6 text-[#5F6671]">
-                      {point.body}
-                    </p>
-                  </div>
-                ))}
-              </div>
-              <div className="border-t border-line p-6">
-                <div className="flex items-start gap-3">
-                  <Mail className="mt-1 h-5 w-5 shrink-0 text-crimson" />
-                  <div>
-                    <h3 className="text-base font-semibold text-ink">
-                      Check your inbox.
-                    </h3>
-                    <p className="mt-2 text-sm leading-6 text-[#4B5563]">
-                      You&apos;ll get an AIOC confirmation email for the
-                      calendar options, and Demio will send your join link.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </aside>
 
-          <div
-            id="calendar"
-            className="relative z-10 grid scroll-mt-24 grid-flow-dense grid-cols-1 border-y border-line lg:col-span-2 lg:grid-cols-[0.78fr_1.22fr]"
-          >
-            <div className="border-b border-line py-6 lg:border-b-0 lg:border-r lg:pr-8">
-              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-crimson">
-                Add it now
-              </p>
-              <h2 className="mt-3 text-xl font-semibold text-ink">
-                Put the session on the calendar you actually use.
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-[#5F6671]">
-                Google and Outlook open directly. Apple/iCal downloads the
-                invite. Your unique join link still comes from Demio.
-              </p>
-            </div>
-            <div className="py-6 lg:pl-8">
-              <WebinarCalendarButtons />
-            </div>
-          </div>
-
-          <div className="relative z-10 grid grid-flow-dense grid-cols-1 border-b border-line md:grid-cols-3 lg:col-span-2">
-            {eventDetails.map((item) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.label}
-                  className="border-line py-6 md:border-r md:px-6 md:first:pl-0 md:last:border-r-0"
-                >
-                  <div className="flex items-center gap-2 text-crimson">
-                    <Icon className="h-4 w-4" aria-hidden />
-                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em]">
-                      {item.label}
-                    </p>
-                  </div>
-                  <h2 className="mt-4 text-base font-semibold text-ink">
-                    {item.title}
-                  </h2>
-                  <p className="mt-2 text-sm leading-6 text-[#5F6671]">
-                    {item.body}
+              <div className="grid grid-flow-dense grid-cols-1 divide-y divide-line">
+                <div className="p-6 sm:p-8">
+                  <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-crimson">
+                    On the call, watch for
                   </p>
+                  <div className="mt-5 grid gap-3 sm:grid-cols-3">
+                    {callFocusItems.map((item) => (
+                      <div
+                        key={item}
+                        className="flex items-start gap-3 rounded-md border border-line bg-[#F7F7F5] p-4"
+                      >
+                        <CheckCircle2
+                          className="mt-0.5 h-4 w-4 shrink-0 text-crimson"
+                          aria-hidden
+                        />
+                        <p className="text-sm font-semibold leading-6 text-[#3B414A]">
+                          {item}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              );
-            })}
+
+                <div className="grid grid-flow-dense grid-cols-1 divide-y divide-line md:grid-cols-3 md:divide-x md:divide-y-0">
+                  {mikeContextPoints.map((point) => (
+                    <div key={point.title} className="p-6">
+                      <h3 className="text-base font-semibold leading-6 text-ink">
+                        {point.title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-6 text-[#5F6671]">
+                        {point.body}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
