@@ -8,6 +8,10 @@ import { buildBusinessAIAuditEmail } from "@/lib/email/business-audit-sequence"
 import { buildW2PlaybookEmail } from "@/lib/email/w2-playbook-sequence"
 import { buildPostBookingEducationEmail } from "@/lib/email/post-booking-education"
 import { buildScoreappFitEmail } from "@/lib/email/scoreapp-ai-operator-fit"
+import {
+  AIOC_WEBINAR_QUEUE_KEY,
+  buildWebinarQueuedEmail,
+} from "@/lib/email/webinar-event"
 import { AOC_FROM_EMAIL, AOC_REPLY_TO } from "@/lib/email/senders"
 
 /**
@@ -43,6 +47,10 @@ function templateKeyFor(sequenceKey: string, emailIndex: number): string | undef
   }
   if (sequenceKey.startsWith("scoreapp-")) {
     return `${sequenceKey}.${emailIndex}`
+  }
+  if (sequenceKey === AIOC_WEBINAR_QUEUE_KEY) {
+    if (emailIndex === 0) return "aoc.webinar-reminder.day-before"
+    if (emailIndex === 1) return "aoc.webinar-reminder.morning-of"
   }
   return undefined
 }
@@ -125,6 +133,8 @@ export async function GET(req: Request) {
           emailContent = buildPostBookingEducationEmail(3, meta)
         } else if (item.sequenceKey.startsWith("scoreapp-")) {
           emailContent = buildScoreappFitEmail(item.emailIndex, meta)
+        } else if (item.sequenceKey === AIOC_WEBINAR_QUEUE_KEY) {
+          emailContent = buildWebinarQueuedEmail(item.emailIndex, meta)
         }
         // All legacy AIMS sequences (post-quiz, post-calculator, post-audit,
         // post-purchase, partner-onboard, reseller-onboard) return null here
@@ -141,7 +151,10 @@ export async function GET(req: Request) {
           to: item.recipientEmail,
           replyTo: AOC_REPLY_TO,
           subject: emailContent.subject,
-          html: emailLayout(emailContent.html, emailContent.subject),
+          html: emailLayout(
+            emailContent.html,
+            emailContent.preview ?? emailContent.subject,
+          ),
           serviceArm: "ai-operator-collective",
           // Wiring this through is what lets admin edits at
           // /admin/email-templates actually take effect for queued
@@ -222,5 +235,6 @@ export async function GET(req: Request) {
 
 interface EmailContent {
   subject: string
+  preview?: string
   html: string
 }

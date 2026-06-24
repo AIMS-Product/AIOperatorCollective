@@ -7,7 +7,10 @@ import {
   registerDemioAttendee,
 } from "@/lib/demio"
 import { db } from "@/lib/db"
-import { sendWebinarRegistrationConfirmationEmail } from "@/lib/email/webinar-event"
+import {
+  scheduleWebinarReminderEmails,
+  sendWebinarRegistrationConfirmationEmail,
+} from "@/lib/email/webinar-event"
 import { logger } from "@/lib/logger"
 import { AIOC_WEBINAR_EVENT } from "@/lib/marketing/webinar-event"
 import { notify } from "@/lib/notifications"
@@ -174,6 +177,16 @@ export async function POST(req: Request) {
       name: contactName,
     }).catch((err) =>
       logger.error("Failed to send webinar confirmation email", err, {
+        email,
+        eventSlug: AIOC_WEBINAR_EVENT.slug,
+      }),
+    )
+
+    scheduleWebinarReminderEmails({
+      email,
+      name: contactName,
+    }).catch((err) =>
+      logger.error("Failed to schedule webinar reminder emails", err, {
         email,
         eventSlug: AIOC_WEBINAR_EVENT.slug,
       }),

@@ -7,6 +7,7 @@ import {
   p,
   sendTrackedEmail,
 } from "@/lib/email"
+import { db } from "@/lib/db"
 import { AOC_FROM_EMAIL, AOC_REPLY_TO } from "@/lib/email/senders"
 import {
   AIOC_WEBINAR_EVENT,
@@ -25,6 +26,21 @@ export interface WebinarEmailContent {
 type WebinarReminderTiming = "day-before" | "morning-of"
 type WebinarFollowUpType = "attended" | "missed"
 
+export const AIOC_WEBINAR_QUEUE_KEY = AIOC_WEBINAR_EVENT.slug
+
+const WEBINAR_REMINDER_SCHEDULE = [
+  {
+    emailIndex: 0,
+    timing: "day-before",
+    scheduledFor: "2026-06-29T14:00:00.000Z",
+  },
+  {
+    emailIndex: 1,
+    timing: "morning-of",
+    scheduledFor: "2026-06-30T13:00:00.000Z",
+  },
+] as const
+
 export async function sendWebinarRegistrationConfirmationEmail(params: {
   to: string
   name: string
@@ -42,6 +58,36 @@ export async function sendWebinarRegistrationConfirmationEmail(params: {
     templateKey: "aoc.webinar-registration-confirmation",
     campaignTag: "aioc-cohort-1-webinar",
   })
+}
+
+export async function scheduleWebinarReminderEmails(params: {
+  email: string
+  name: string
+}) {
+  const existing = await db.emailQueueItem.findFirst({
+    where: {
+      recipientEmail: params.email,
+      sequenceKey: AIOC_WEBINAR_QUEUE_KEY,
+    },
+  })
+  if (existing) return
+
+  const now = Date.now()
+  const rows = WEBINAR_REMINDER_SCHEDULE.map((item) => ({
+    recipientEmail: params.email,
+    sequenceKey: AIOC_WEBINAR_QUEUE_KEY,
+    emailIndex: item.emailIndex,
+    scheduledFor: new Date(item.scheduledFor),
+    metadata: {
+      name: params.name,
+      timing: item.timing,
+      eventSlug: AIOC_WEBINAR_EVENT.slug,
+    },
+  })).filter((item) => item.scheduledFor.getTime() > now + 5 * 60_000)
+
+  if (!rows.length) return
+
+  await db.emailQueueItem.createMany({ data: rows })
 }
 
 export async function sendWebinarReminderEmail(params: {
@@ -83,6 +129,24 @@ export async function sendWebinarFollowUpEmail(params: {
     templateKey: `aoc.webinar-follow-up.${params.type}`,
     campaignTag: "aioc-cohort-1-webinar",
   })
+}
+
+export function buildWebinarQueuedEmail(
+  emailIndex: number,
+  metadata: Record<string, unknown>,
+): WebinarEmailContent | null {
+  const firstName =
+    typeof metadata.name === "string" ? firstNameFrom(metadata.name) : "there"
+
+  if (emailIndex === 0) {
+    return buildWebinarReminderEmail("day-before", firstName)
+  }
+
+  if (emailIndex === 1) {
+    return buildWebinarReminderEmail("morning-of", firstName)
+  }
+
+  return null
 }
 
 export function buildWebinarRegistrationConfirmationEmail(
