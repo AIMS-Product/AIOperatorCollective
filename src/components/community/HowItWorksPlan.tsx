@@ -6,12 +6,12 @@ const STEPS = [
   {
     n: "01",
     title: "Apply",
-    body: "start with the application so the Collective can understand your background, goals, and available time.",
+    body: "start with the short application so the Collective can understand your background, goals, and available time.",
   },
   {
     n: "02",
     title: "Join a cohort",
-    body: "if there is a fit, enter a small cohort with monthly intake and shared progression.",
+    body: "if there is a fit after written review and a mutual-fit call, enter a small cohort with monthly intake and shared progression.",
   },
   {
     n: "03",
@@ -47,7 +47,7 @@ export function HowItWorksPlan() {
             The Collective runs through monthly cohort intake. Each cohort is limited to 10
             people so members can progress together, bring real questions into the
             room, and practice both sides of the work: finding the opportunity and
-            solving the problem.
+            solving the problem. The next cohort starts the first week of July.
           </p>
           <p className="mt-4 text-base sm:text-lg text-[#737373] leading-relaxed">
             This is an apprenticeship, not a passive course library. You will not be

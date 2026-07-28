@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 const QUESTIONS = [
   {
     q: "Do I need a technical background?",
-    a: "No. The Collective is not built for AI engineers. It is built for smart, operator-minded people who want to understand how AI can solve real business problems. Technical curiosity helps. Business judgment matters more.",
+    a: "No engineering degree, no. But this is for people who already tinker with AI, not people who watch from the sidelines. If you've hacked together a custom GPT, a script, or an automation at work, however small, you're in the right place. Business judgment is what we train; the tinkering you bring.",
   },
   {
     q: "Can I do this while I am still in my W2?",
@@ -31,7 +31,7 @@ const QUESTIONS = [
   },
   {
     q: "What happens after I apply?",
-    a: "We review your application, then qualified applicants are invited to a call with someone from our team.\n\nThat call is not a pressure pitch. It is a mutual fit conversation about your current situation, what you are trying to build, and whether the Collective is a strategic next room for you.\n\nWe are not trying to build a giant community with thousands of members. We are looking for the right people to invest time in: curious, high-agency operators who want to build real capability and take the work seriously.",
+    a: "We review your application, then qualified applicants are invited to a call with someone from our team.\n\nThat call is not a pressure pitch. It is a mutual fit conversation about your current situation, what you are trying to build, and whether the Collective is a strategic next room for you.\n\nWe are not trying to build a giant community with thousands of members. We are looking for the right people to invest time in: curious, high-agency operators who want to build real capability and take the work seriously. Cohorts start monthly; the next starts the first week of July.",
   },
 ]
 

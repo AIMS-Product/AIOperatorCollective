@@ -1,13 +1,13 @@
 import { Check, X } from "lucide-react"
 
 const FIT = [
-  "You are in a W2 role and can see AI changing the shape of work.",
-  "You are technically curious, but not trying to become an AI engineer.",
-  "You have seen enough business mess to know tools alone will not fix it.",
-  "You want to turn your corporate experience into practical operator judgment.",
-  "You want help finding the right businesses to approach, not just learning tools.",
-  "You are willing to practice prospecting, discovery, diagnosis, workflow thinking, and client-ready communication.",
-  "You want structure, discussion, and real reps.",
+  "You already tinker with AI: a custom GPT, a script, an automation at work, even if you'd never call it building.",
+  "You're in a W2 role and can see AI changing the shape of work, including yours.",
+  "You've seen enough business mess to know tools alone won't fix it.",
+  "You want what you do with AI to count for something beyond a paycheck.",
+  "You want help finding the right businesses and the right problems, not another tool course.",
+  "You're willing to practice intake conversations, diagnosis, workflow thinking, and scoping.",
+  "You want structure, feedback, and real reps.",
 ]
 
 const NOT_FIT = [
@@ -17,6 +17,7 @@ const NOT_FIT = [
   "You want to build complicated automations before you understand the workflow.",
   "You are looking for a fixed-duration shortcut instead of an ongoing apprenticeship.",
   "You need every detail to be perfectly certain before you start practicing.",
+  "You read about AI every day but never open the tools.",
 ]
 
 export function WhatIsSection() {

@@ -19,26 +19,26 @@ import { ApplicationCard } from "@/components/community/ApplicationCard"
 
 export const metadata: Metadata = {
   title:
-    "AI Operator Collective | Move from AI-Curious to AI-Capable",
+    "AI Operator Collective | Turn AI Tinkering into Operator Judgment",
   description:
-    "The AI Operator Collective is a cohort-based apprenticeship for people who want to become useful where AI turns into business value: prospecting, discovery, diagnosis, scoping, setup, and delivery. Application-only. 10 seats per cohort.",
+    "A cohort-based apprenticeship for people who already tinker with AI and want the judgment side: finding real business problems, scoping them, and earning the trust to fix them. Application-only. 10 seats per cohort.",
   alternates: { canonical: "https://aioperatorcollective.com" },
   openGraph: {
     type: "website",
     url: "https://aioperatorcollective.com",
     siteName: "AI Operator Collective",
     title:
-      "AI Operator Collective | Move from AI-Curious to AI-Capable",
+      "AI Operator Collective | Turn AI Tinkering into Operator Judgment",
     description:
-      "Cohort-based apprenticeship for people who want to become credible AI Operators. Application-only. 10 seats per cohort. Powered by AIMS.",
+      "Cohort-based apprenticeship for people who already tinker with AI and want the judgment side. Application-only. 10 seats per cohort. Powered by AIMS.",
     images: [{ url: "/og-image.png?v=2", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title:
-      "AI Operator Collective | Move from AI-Curious to AI-Capable",
+      "AI Operator Collective | Turn AI Tinkering into Operator Judgment",
     description:
-      "Cohort-based apprenticeship for credible AI Operators. Application-only. Powered by AIMS.",
+      "Cohort-based apprenticeship for people who already tinker with AI. Application-only. Powered by AIMS.",
     images: [{ url: "/og-image.png?v=2", width: 1200, height: 630 }],
   },
 }
@@ -67,7 +67,7 @@ const FAQ_SCHEMA = {
       name: "Do I need a technical background?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "No. The Collective is not built for AI engineers. It is built for smart, operator-minded people who want to understand how AI can solve real business problems. Technical curiosity helps. Business judgment matters more.",
+        text: "No engineering degree, no. But this is for people who already tinker with AI, not people who watch from the sidelines. If you've hacked together a custom GPT, a script, or an automation at work, however small, you're in the right place. Business judgment is what we train; the tinkering you bring.",
       },
     },
     {
@@ -115,7 +115,7 @@ const FAQ_SCHEMA = {
       name: "What happens after I apply?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "We review your application, then qualified applicants are invited to a call with someone from our team. That call is a mutual fit conversation, not a pressure pitch. We are looking for curious, high-agency operators who want to build real capability.",
+        text: "We review your application, then qualified applicants are invited to a call with someone from our team. That call is a mutual fit conversation, not a pressure pitch. We are looking for curious, high-agency operators who want to build real capability. Cohorts start monthly; the next starts the first week of July.",
       },
     },
   ],
